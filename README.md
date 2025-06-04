@@ -19,6 +19,7 @@ MOTA = 1 - (FP + FN + ID switches) / total GT detections
 MOTP (Multiple Object Tracking Precision)
 Measures how precisely our predicted boxes match the ground truth in terms of IoU.
 
+
 ID Switches
 This is how many times our tracker accidentally assigned different IDs to the same object across frames — a key metric for real-time ADAS.
 
@@ -29,3 +30,8 @@ ML (Most Lost)
 Tracks with <20% of lifetime tracked
 
 MOTA for coverage, IDF1 for ID preservation. HOTA for balance
+
+BYTETrack actually uses:
+IOU-only matching (no appearance)
+Tracks both high conf detections and low conf for association
+Simple Kalman (center x, y, aspect ratio, height)
