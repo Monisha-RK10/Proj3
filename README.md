@@ -35,3 +35,8 @@ BYTETrack actually uses:
 IOU-only matching (no appearance)
 Tracks both high conf detections and low conf for association
 Simple Kalman (center x, y, aspect ratio, height)
+
+
+DetA (Detection Accuracy): How good are detections (YOLO)?
+AssA (Association Accuracy): How well are linking objects over time (BYTETrack)?
+MOTA is affected by both. HOTA separates them.
