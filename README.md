@@ -27,3 +27,5 @@ Tracks with >80% of lifetime tracked well
 
 ML (Most Lost)
 Tracks with <20% of lifetime tracked
+
+MOTA for coverage, IDF1 for ID preservation. HOTA for balance
