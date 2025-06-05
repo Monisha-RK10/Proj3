@@ -1,15 +1,14 @@
-| Metric           | Meaning                                                                    | Real-world Example                                                                                            |
-| ---------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **IDF1**         | Identity F1 score: 
-how well you **maintain object identity across frames** | You track car A and car B. If you keep assigning the correct ID to both without mix-up, IDF1 is high.         |
-| **IDP**          | Identity Precision                                                         | Out of all track IDs your model predicted, how many were correct.                                             |
-| **IDR**          | Identity Recall                                                            | Out of all real car identities, how many did you correctly follow.                                            |
-| **MOTA**         | Multi-Object Tracking Accuracy (summary of FP, FN, ID switches)            | Higher = better overall tracking. If you miss many cars (FN), make ID mistakes (ID switches), MOTA goes down. |
-| **MOTP**         | Multi-Object Tracking Precision (localization error of bounding boxes)     | Lower = better box alignment with ground truth.                                                               |
-| **MT / PT / ML** | Mostly Tracked / Partially / Mostly Lost                                   | Out of 9 cars: 6 were well-tracked (MT), 2 sometimes (PT), 1 mostly lost (ML)                                 |
-| **FP / FN**      | False Positives / False Negatives                                          | FP: Detect a car when none is there. FN: Missed a real car.                                                   |
-| **IDs**          | ID switches                                                                | If you call Car A "ID 1" in frame 0, but then call it "ID 3" later — this is a switch.                        |
-| **FM**           | Fragmentations                                                             | The track is broken, disappears, then reappears.                                                              |
+| Metric           | Meaning                                                                    | Real-world Example  |
+| ---------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **IDF1**         | Identity F1 score (Higher)                                                 | Keep assigning the correct ID to car A & B across frames without mix-up|
+| **IDP**          | Identity Precision                                                         | Out of all track IDs your model predicted, how many were correct|
+| **IDR**          | Identity Recall                                                            | Out of all real car identities, how many did you correctly follow |
+| **MOTA**         | Multi-Object Tracking Accuracy (summary of FP, FN, ID switches) (Higher)   | If many cars missed (FN), make ID mistakes (ID switches), MOTA goes down |
+| **MOTP**         | Multi-Object Tracking Precision (localization error of bounding boxes)     | Lower = better box alignment with ground truth |
+| **MT / PT / ML** | Mostly Tracked / Partially / Mostly Lost                                   | Total 9 cars: 6 were well-tracked(MT), 2 sometimes(PT), 1 mostly lost(ML) |
+| **FP / FN**      | False Positives / False Negatives                                          | FP: Detect a car when none is there. FN: Missed a real car|
+| **IDs**          | ID switches                                                                | If Car A "ID 1" in frame 0, but then "ID 3" later, this is a switch|
+| **FM**           | Fragmentations                                                             | The track is broken, disappears, then reappears |
 
 
 
