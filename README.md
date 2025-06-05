@@ -43,4 +43,12 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 - Using depth-aware filtering to improve spatial consistency
 - Filtering out very low-confidence boxes
 
+## Demo Video
+
+<p align="center">
+  <img src="videos/output_yolo_bytetrack.gif" width="700"/>
+</p>
+
+Play Or download the full video: [output_yolo_bytetrack.mp4](videos/output_yolo_bytetrack.mp4)
+
 ---
