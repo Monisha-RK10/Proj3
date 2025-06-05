@@ -6,8 +6,13 @@
 
 
 > IDF1 = 69.5% -> Good identity consistency across frames
+
 > IDP/IDR -> Balanced precision (65.1%) and recall (74.5%) of track IDs
+
 > FP / FN = 62 / 27 → False positives slightly higher, possible over-detections
+
 > IDs = 14 -> Identity switches still present, can improve
+
 > MOTA = 57.6% -> Overall multi-object tracking accuracy is reasonable for basic IoU-based tracking
+
 > MT / PT / ML = 6 cars well-tracked, 2 partially, 1 mostly lost
