@@ -1,4 +1,4 @@
-# Step 1: Inference (get all detecttions for tracker)
+# Step 1: Inference (get all detections for tracker)
 
 from ultralytics import YOLO
 
