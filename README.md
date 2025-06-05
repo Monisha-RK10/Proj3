@@ -8,10 +8,15 @@
 - IDF1 = 69.5% -> Good identity consistency across frames
 - IDP/IDR -> Balanced precision (65.1%) and recall (74.5%) of track IDs
 - FP / FN = 62 / 27 -> False positives slightly higher, possible over-detections
+- IDs = 14 -> Identity switches still present, can improve
+- MOTA = 57.6% -> Overall multi-object tracking accuracy is reasonable for basic IoU-based tracking
+- MT / PT / ML = 6 cars well-tracked, 2 partially, 1 mostly lost
+---
 
-> IDs = 14 -> Identity switches still present, can improve
+This result was achieved using YOLOv8 + BYTETrack on KITTI. No appearance cues were used, so tracking is purely IoU-based. There is still room to reduce identity switches and false positives, possibly by:
 
-> MOTA = 57.6% -> Overall multi-object tracking accuracy is reasonable for basic IoU-based tracking
+- Adding appearance-based re-ID (e.g. DeepSORT)
+- Using depth-aware filtering to improve spatial consistency
+- Filtering out very low-confidence boxes
 
-> MT / PT / ML = 6 cars well-tracked, 2 partially, 1 mostly lost
 ---
