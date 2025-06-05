@@ -1,23 +1,10 @@
-Phase 1: Core MOT 
-Input: Left camera images
-YOLOv8 → BYTETrack → KITTI format
-Visualize & evaluate with KITTI
+**Pipeline Overview**
 
-YOLOv8 detections → BYTETrack Tracker → KITTI-style output
-↓
-MOT Evaluation (motmetrics)
-↓
-Metrics + Visual Output
-
----YOLOv8 detections → BYTETrack Tracker → KITTI-style output
-     
-                                ↓
-             
-                    MOT Evaluation (motmetrics)
-                    
-                                ↓
-                    
-                        Metrics + Visual Output
+1. YOLOv8 detections on Left camera images
+2. → BYTETrack Tracker
+3. → KITTI-style tracking output
+4. ↓ MOT Evaluation using `motmetrics`
+5. ↓ Generate evaluation metrics + visualizations
 
 
 BYTETrack actually uses:
