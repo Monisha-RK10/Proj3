@@ -13,11 +13,11 @@ np.float = float
 def run_bytetrack(image_dir, model_path="yolov8n.pt", seq_id="0000", output_dir="results/", frame_rate=30):
     # Tracker arguments using SimpleNamespace
     args = SimpleNamespace(
-        track_thresh=0.5,
-        track_buffer=30,
-        match_thresh=0.8,
-        mot20=False,
-        min_box_area=100
+        track_thresh=0.5,  # detection confidence threshold
+        track_buffer=30,   # how long to keep a lost track
+        match_thresh=0.8,  # IOU matching threshold
+        mot20=False,       # use MOT20-specific thresholds
+        min_box_area=100   # filter very small boxes
     )
 
     # Tracker initialization
