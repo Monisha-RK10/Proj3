@@ -3,6 +3,13 @@ Input: Left camera images
 YOLOv8 → BYTETrack → KITTI format
 Visualize & evaluate with KITTI
 
+YOLOv8 detections → BYTETrack Tracker → KITTI-style output
+                                ↓
+                    MOT Evaluation (motmetrics)
+                                ↓
+                        Metrics + Visual Output
+
+
 BYTETrack actually uses:
 IOU-only matching (no appearance)
 Tracks both high conf detections and low conf for association
