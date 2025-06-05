@@ -1,13 +1,12 @@
 # Step 3: Evaluate tracker
 
+import motmetrics as mm
+import os
 import numpy as np
 
 # Patch for NumPy 2.0 compatibility (important for older motmetrics)
 if not hasattr(np, 'asfarray'):
     np.asfarray = lambda a: np.asarray(a, dtype=np.float64)
-
-import motmetrics as mm
-import os
 
 # === 1. Load Ground Truth ===
 def read_kitti_gt_file(file_path, obj_type="Car"):
