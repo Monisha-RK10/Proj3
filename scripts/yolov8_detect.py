@@ -6,8 +6,8 @@ def run_yolov8_on_frames(frames, model_path="yolov8n.pt"):
     model = YOLO(model_path)
     all_detections = []
 
-    for i, frame_path in enumerate(frames):
-        results = model(frame_path)[0]
+    for i, frame_path in enumerate(frames): # Get index & iamge file paths
+        results = model(frame_path)[0]      # The first batch item 
         detections = []
         for box in results.boxes:
             x1, y1, x2, y2 = box.xyxy[0].tolist()
