@@ -9,8 +9,8 @@
 ---
 ## BYTETrack uses:
 
-- IoU-only matching: No appearance features (unlike DeepSORT); association is based purely on bounding box overlap.
-- Dual-threshold strategy: Tracks high-confidence detections for new/confirmed tracks and low-confidence detections to help associate missed tracks.
+- IoU-only matching: No appearance features (unlike DeepSORT), association is based purely on bounding box overlap.
+- Dual-threshold strategy: Tracks high-confidence detections for new/confirmed tracks & low-confidence detections to help associate missed tracks.
 - Simple Kalman Filter: Models bounding boxes with (center x, center y, aspect ratio, height) for prediction and update.
 
 ---
