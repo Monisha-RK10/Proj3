@@ -3,7 +3,11 @@ Input: Left camera images
 YOLOv8 → BYTETrack → KITTI format
 Visualize & evaluate with KITTI
 
-
+YOLOv8 detections → BYTETrack Tracker → KITTI-style output
+↓
+MOT Evaluation (motmetrics)
+↓
+Metrics + Visual Output
 
 ---YOLOv8 detections → BYTETrack Tracker → KITTI-style output
      
