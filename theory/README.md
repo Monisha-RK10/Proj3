@@ -1,12 +1,3 @@
-## Pipeline Overview
-
-1. YOLOv8 detections on Left camera images
-2. → BYTETrack Tracker
-3. → KITTI-style tracking output
-4. ↓ MOT Evaluation using `motmetrics`
-5. ↓ Generate evaluation metrics + visualizations
-
----
 ## BYTETrack uses:
 
 - IoU-only matching: No appearance features (unlike DeepSORT), association is based purely on bounding box overlap.
