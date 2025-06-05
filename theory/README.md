@@ -4,7 +4,8 @@ YOLOv8 → BYTETrack → KITTI format
 Visualize & evaluate with KITTI
 
 
-YOLOv8 detections → BYTETrack Tracker → KITTI-style output
+
+---YOLOv8 detections → BYTETrack Tracker → KITTI-style output
      
                                 ↓
              
