@@ -1,4 +1,20 @@
-# Real-Time Multi-Object Tracking for Autonomous Driving using YOLOv8 and BYTETrack with KITTI Benchmark Evaluation
+# Real-Time Multi-Object Tracking for Autonomous Driving using YOLOv8 and BYTETrack with KITTI Evaluation
+
+This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using:
+
+- **YOLOv8** for real-time object detection
+- **BYTETrack** for identity-preserving multi-object tracking
+- Evaluation against the **KITTI Tracking Benchmark** using `motmetrics`
+
+---
+
+## Dataset
+
+- **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
+- Real-world driving scenes
+- Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
+- Used **sequence 0000** for this project
+
 
 ## KITTI Tracking Performance (YOLOv8 + BYTETrack on Seq 0000)
 
