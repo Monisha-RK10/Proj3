@@ -6,11 +6,16 @@
 4. ↓ MOT Evaluation using `motmetrics`
 5. ↓ Generate evaluation metrics + visualizations
 
+---
+## BYTETrack uses:
 
-BYTETrack actually uses:
-IOU-only matching (no appearance)
-Tracks both high conf detections and low conf for association
-Simple Kalman (center x, y, aspect ratio, height)
+- IOU-only matching (no appearance)
+- Tracks both high conf detections and low conf for association
+- Simple Kalman (center x, y, aspect ratio, height)
+
+---
+
+## Metric Explanation
 
 | Metric           | Meaning                                                                    | Real-world Example  |
 | ---------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
