@@ -1,4 +1,4 @@
-**Pipeline Overview**
+# Pipeline Overview
 
 1. YOLOv8 detections on Left camera images
 2. → BYTETrack Tracker
