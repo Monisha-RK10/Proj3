@@ -49,6 +49,5 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
   <img src="videos/output_yolo_bytetrack.gif" width="700"/>
 </p>
 
-Play Or download the full video: [output_yolo_bytetrack.mp4](videos/output_yolo_bytetrack.mp4)
+[Download full MP4 video](videos/output_yolo_bytetrack.mp4)
 
----
