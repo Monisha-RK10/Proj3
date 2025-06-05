@@ -36,7 +36,7 @@ def run_bytetrack(image_dir, model_path="yolov8n.pt", seq_id="0000", output_dir=
         img = cv2.imread(frames[frame_id])
         h, w = img.shape[:2]
 
-        # Prepare detections for BYTETracker: [x1, y1, x2, y2, score]
+        # Prepare detections for BYTETracker: [x1, y1, x2, y2, conf, cls]
         byte_dets = [[*d[:4], d[4]] for d in dets if d[4] > 0.3]  # confidence threshold
         byte_dets = np.array(byte_dets)
 
