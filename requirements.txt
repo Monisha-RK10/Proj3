@@ -1,0 +1,7 @@
+ultralytics
+cython
+lap
+scipy
+loguru
+motmetrics
+cython_bbox
