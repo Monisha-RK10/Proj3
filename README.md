@@ -17,10 +17,10 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 ## Pipeline Overview
 - YOLOv8 detections on Left camera images → BYTETrack Tracker → KITTI-style tracking output
-                                      -        ↓
-                                      -    MOT Evaluation using `motmetrics`
-                                      -        ↓
-                                      -    Generate evaluation metrics + visualizations
+-  ↓
+-  MOT Evaluation using `motmetrics`
+-  ↓
+-  Generate evaluation metrics + visualizations
    
 ## Tracking Results
 
