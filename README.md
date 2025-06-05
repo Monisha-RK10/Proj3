@@ -15,7 +15,13 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
 
-
+## Pipeline Overview
+- YOLOv8 detections on Left camera images → BYTETrack Tracker → KITTI-style tracking output
+                                      -        ↓
+                                      -    MOT Evaluation using `motmetrics`
+                                      -        ↓
+                                      -    Generate evaluation metrics + visualizations
+   
 ## Tracking Results
 
 | **Metric** | IDF1 |  IDP  | IDR |  Rcll | Prcn | GT | MT | PT | ML | FP | FN | IDs | FM  | MOTA | MOTP | IDt | IDa | IDm|
