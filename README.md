@@ -6,10 +6,9 @@
 
 
 > IDF1 = 69.5% -> Good identity consistency across frames
-
 > IDP/IDR -> Balanced precision (65.1%) and recall (74.5%) of track IDs
 
-> FP / FN = 62 / 27 → False positives slightly higher, possible over-detections
+> FP / FN = 62 / 27 -> False positives slightly higher, possible over-detections
 
 > IDs = 14 -> Identity switches still present, can improve
 
