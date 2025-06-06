@@ -47,7 +47,7 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 ## Demo Video
 
 <p align="center">
-  <img src="videos/kitti_tracking_output" width="1000"/>
+  <img src="videos/kitti_tracking_output.gif" width="1000"/>
 </p>
 
 [Download full MP4 video](videos/kitti_tracking_output.mp4)
