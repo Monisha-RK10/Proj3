@@ -28,6 +28,19 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 | **Value** |69.5% | 65.1% |74.5% |88.9%| 77.7%|  9 |  6|   2  | 1  | 62|  27 |  14 |  6  | 57.6% | 0.247 |12  | 5 |   3|
 
 ---
+
+## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
+
+I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. `conf = 0.6` gave the best IDF1 score and an optimal balance between false positives and false negatives.
+
+| Conf | IDF1  | IDP  | IDR  | Rcll | Prcn | FP  | FN  | IDs | MOTA | Comments |
+|------|-------|------|------|------|------|-----|-----|------|------|----------|
+| 0.5  | 60.0% | 47.7% | 80.7% | 89.3% | 52.8% | 334 | 45  | 9  | 7.4%  | Good balance |
+| 0.6  | 62.5% | 51.5% | 79.7% | 86.2% | 55.6% | 288 | 58  | 9  | 15.3% | **Best IDF1**, slightly more FN |
+| 0.7  | 60.7% | 57.0% | 64.9% | 70.6% | 62.1% | 181 | 123 | 12 | 24.6% | Too many missed GTs (FN↑) |
+| 0.8  | 43.2% | 58.1% | 34.4% | 39.4% | 66.5% | 83  | 254 | 10 | 17.2% | FN very high, recall broken |
+
+
 ## Evaluation Metrics
 - **IDF1 (69.5%)**: Good identity consistency across frames
 - **IDP / IDR (65.1% / 74.5%)**: Balanced precision and recall of track IDs
