@@ -20,13 +20,6 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - YOLOv8 → BYTETrack → KITTI format
 - Visualize & evaluate with KITTI
 
-   
-## Tracking Results
-
-| **Metric** | IDF1 |  IDP  | IDR |  Rcll | Prcn | GT | MT | PT | ML | FP | FN | IDs | FM  | MOTA | MOTP | IDt | IDa | IDm|
-|------------|------|-------|-----|-------|------|----|----|----|----|----|----|-----|-----|------|------|-----|-----|----|
-| **Value** |69.5% | 65.1% |74.5% |88.9%| 77.7%|  9 |  6|   2  | 1  | 62|  27 |  14 |  6  | 57.6% | 0.247 |12  | 5 |   3|
-
 ---
 
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
@@ -40,6 +33,7 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 | 0.7  | 60.7% | 57.0% | 64.9% | 70.6% | 62.1% | 181 | 123 | 12 | 24.6% | Too many missed GTs (FN↑) |
 | 0.8  | 43.2% | 58.1% | 34.4% | 39.4% | 66.5% | 83  | 254 | 10 | 17.2% | FN very high, recall broken |
 
+---
 
 ## Evaluation Metrics
 - **IDF1 (69.5%)**: Good identity consistency across frames
