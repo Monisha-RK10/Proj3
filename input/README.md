@@ -11,7 +11,7 @@ This folder contains three types of input files used in the project:
 ### 1. KITTI Ground Truth Format
 Used for YOLOv8 training and tracking evaluation.
 
-frame id | track id | class | trunc | occ | alpha | bbox left | top | right | bottom | ...3D info...
+>>frame id | track id | class | trunc | occ | alpha | bbox left | top | right | bottom | ...3D info...
 
 
 **Example:**
@@ -23,7 +23,7 @@ frame id | track id | class | trunc | occ | alpha | bbox left | top | right | bo
 ### 2. BYTETrack Detection Format
 Used as input to BYTETrack. Each line corresponds to one detection.
 
-frame_id | -1 | x1 | y1 | x2 | y2 | score | class_id
+>>frame_id | -1 | x1 | y1 | x2 | y2 | score | class_id
 
 **Example:**
 
@@ -34,7 +34,7 @@ frame_id | -1 | x1 | y1 | x2 | y2 | score | class_id
 ### 3. Tracker Output Format (KITTI-style)
 Output from BYTETrack, used for KITTI-style multi-object tracking evaluation.
 
-frame_id | track_id | class | trunc | occ | alpha | bbox_left | top right | bottom | ... (3D info optional)
+>>frame_id | track_id | class | trunc | occ | alpha | bbox_left | top right | bottom | ... (3D info optional)
 
 **Example:**
 
