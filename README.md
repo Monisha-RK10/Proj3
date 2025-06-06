@@ -57,3 +57,9 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 
 [Download full MP4 video](videos/kitti_tracking_output.mp4)
 
+## Author
+
+**Monisha**  
+Connect via [Medium](https://medium.com/@monishatemp20)  
+
+---
