@@ -38,15 +38,17 @@ with open(det_file, "r") as f:
         if cls_id in [0, 1, 2]:  # person, bicycle, car (COCO IDs)  3-class filtering happens again
             det = [x1, y1, x2, y2, conf, cls_id]
             frame_detections.setdefault(frame_id, []).append(det) # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
+            # Example: frame_detections = { 0: ["car", "pedestrian"],   1: ["cyclist"]}
 
 # Helper: Compute IoU
 # Problem: BYTETrack doesn't store the class information
 # Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap and grabs its cls_id.
 
 def compute_iou(box1, box2):
-    xi1, yi1 = max(box1[0], box2[0]), max(box1[1], box2[1])
-    xi2, yi2 = min(box1[2], box2[2]), min(box1[3], box2[3])
-    inter_area = max(0, xi2 - xi1) * max(0, yi2 - yi1)
+    # tl(max): x1[0], y1[1], br(min): x2[2], y2[3]
+    xi1, yi1 = max(box1[0], box2[0]), max(box1[1], box2[1])  # top-left of intersection (max)
+    xi2, yi2 = min(box1[2], box2[2]), min(box1[3], box2[3])  # bottom-right of intersection (min)
+    inter_area = max(0, xi2 - xi1) * max(0, yi2 - yi1)       # width × height
 
     box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
     box2_area = (box2[2] - box2[0]) * (box2[3] - box2[1])
@@ -62,7 +64,7 @@ for frame_id in range(len(image_files)):
     img = cv2.imread(img_path)
     h, w = img.shape[:2]
 
-    dets = frame_detections.get(frame_id, [])
+    dets = frame_detections.get(frame_id, []) # If no detecions. return empty
     if len(dets) > 0:
         dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)
     else:
