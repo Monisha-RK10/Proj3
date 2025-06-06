@@ -18,6 +18,11 @@ Example:
 ## BYTETrack format
 frame_id, -1, x1, y1, x2, y2, score, class_id
 
+Example:
+
+0,-1, 1109.93,174.78, 1200.78,
+315.24, 0.85,0
+
 ## Tracker Output from BYTETrack (Which is KITTI tracking format)
 frame id | track id | class | truncated | occluded | alpha | bbox left | top | right | bottom | ...
 
