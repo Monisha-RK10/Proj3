@@ -42,11 +42,11 @@ def run_yolo_detection(input_folder: str,
 
         detections = model.predict(source=frame, conf=confidence_threshold, verbose=False)[0]
 
-        for det in detections.boxes.data:
-            x1, y1, x2, y2, conf, cls = det.tolist()
+        for det in detections.boxes.data:             # To iterate easily over individual detection rows (torch.Tensor of shape (N, 6))
+            x1, y1, x2, y2, conf, cls = det.tolist()  # Converts from PyTorch tensor to Python list (for writing to a file)
             cls = int(cls)
             if cls in id_to_name:
-                results_lines.append(f"{frame_id},-1,{x1:.2f},{y1:.2f},{x2:.2f},{y2:.2f},{conf:.2f},{cls}\n")
+                results_lines.append(f"{frame_id},-1,{x1:.2f},{y1:.2f},{x2:.2f},{y2:.2f},{conf:.2f},{cls}\n")  # track_id: initially set to -1 (meaning “no tracking ID yet”)
         frame_id += 1
 
     with open(output_det_file, "w") as f:
