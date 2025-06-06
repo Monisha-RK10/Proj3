@@ -47,8 +47,8 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 ## Demo Video
 
 <p align="center">
-  <img src="videos/output_yolo_bytetrack.gif" width="1000"/>
+  <img src="videos/kitti_tracking_output" width="1000"/>
 </p>
 
-[Download full MP4 video](videos/output_yolo_bytetrack.mp4)
+[Download full MP4 video](videos/kitti_tracking_output.mp4)
 
