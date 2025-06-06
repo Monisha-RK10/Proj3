@@ -19,9 +19,9 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 - **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
 - **Steps:**  
-  1. **Detection** using YOLOv8  
-  2. **Tracking** using BYTETrack  
-  3. **Evaluation** using MOTMetrics with KITTI labels and BYTETrack outputs
+  - **Detection** using YOLOv8
+  - **Tracking** using BYTETrack
+  - **Evaluation** using MOTMetrics with KITTI labels and BYTETrack outputs
 - **Output:** Quantitative tracking metrics + annotated tracking video
 
 
