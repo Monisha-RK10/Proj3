@@ -17,7 +17,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 ## Pipeline Overview
 - Input: Left camera images
-- YOLOv8 → BYTETrack → KITTI format
+- Detection by YOLOv8 (save results in BYTETrack format) → Tracking by BYTETrack (save results in KITTI format) → Evaluation by Input Labels + BYTETrack results
 - Visualize & evaluate with KITTI
 
 ---
