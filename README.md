@@ -24,7 +24,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
 
-I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. `conf = 0.6` gave the best IDF1 score and an optimal balance between false positives and false negatives.
+I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. 
 
 | Conf | IDF1  | IDP  | IDR  | Rcll | Prcn | FP  | FN  | IDs | MOTA | Comments |
 |------|-------|------|------|------|------|-----|-----|------|------|----------|
@@ -33,16 +33,10 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 | 0.7  | 60.7% | 57.0% | 64.9% | 70.6% | 62.1% | 181 | 123 | 12 | 24.6% | Too many missed GTs (FN↑) |
 | 0.8  | 43.2% | 58.1% | 34.4% | 39.4% | 66.5% | 83  | 254 | 10 | 17.2% | FN very high, recall broken |
 
+At conf=0.6, I achieved the highest IDF1 (62.5%) and a solid MOTA of 15.3% with only 1 mostly lost track. Precision and recall were well balanced (55.6% / 86.2%), and false positives dropped meaningfully. I chose this setting as the optimal point in the precision-recall trade-off for multi-object tracking on KITTI.
+
 ---
 
-## Evaluation Metrics
-- **IDF1 (69.5%)**: Good identity consistency across frames
-- **IDP / IDR (65.1% / 74.5%)**: Balanced precision and recall of track IDs
-- **FP / FN (62 / 27)**: False positives slightly higher, possible over-detections
-- **IDs (14)**: Identity switches still present, can improve
-- **MOTA (57.6%)**: Overall multi-object tracking accuracy is reasonable for basic IoU-based tracking
-- **MT / PT / ML (6 / 2 / 1)**: 6 cars well-tracked, 2 partially, 1 mostly lost
----
 ## Future Directions
 No appearance cues were used, so tracking is purely IoU-based. There is still room to reduce identity switches and false positives, possibly by:
 
