@@ -1,4 +1,4 @@
-# Real-Time Multi-Object Tracking for Autonomous Driving using YOLOv8 and BYTETrack with KITTI Evaluation
+# Real-Time Multi-Object Tracking on KITTI using YOLOv8 and BYTETrack with Quantitative Evaluation
 
 This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using:
 
