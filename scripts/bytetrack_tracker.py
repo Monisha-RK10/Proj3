@@ -10,10 +10,8 @@ import numpy as np
 from types import SimpleNamespace
 from yolox.tracker.byte_tracker import BYTETracker
 
-np.float = float  # For compatibility with older code
-
-# --- Config ---
-args = SimpleNamespace(
+# Config (Object-style config)
+args = SimpleNamespace(  # quick way to create an object with attributes instead of a dictionary
     track_thresh=0.5,    # detection confidence threshold, higher = fewer detections, but more reliable
     track_buffer=30,     # how long to keep a lost track, helps in occlusion recovery (if a car is hidden briefly)
     match_thresh=0.8,    # IOU threshold for associating new detections with existing tracks, higher = stricter match, may lose fast-moving objects
@@ -24,11 +22,11 @@ image_dir = "/content/drive/MyDrive/kitti_tracking/data_tracking_image_2/trainin
 det_file = "/content/0000.txt"
 output_txt = "/content/drive/MyDrive/kitti_tracking/tracks_bytetrack/0000.txt"
 
-# --- Setup ---
+# Setup
 tracker = BYTETracker(args, frame_rate=30)
 image_files = sorted(os.listdir(image_dir))
 
-# --- Load detections ---
+# Load detections
 frame_detections = dict()
 with open(det_file, "r") as f:
     for line in f:
@@ -39,9 +37,9 @@ with open(det_file, "r") as f:
         cls_id = int(parts[7])
         if cls_id in [0, 1, 2]:  # person, bicycle, car (COCO IDs)  3-class filtering happens again
             det = [x1, y1, x2, y2, conf, cls_id]
-            frame_detections.setdefault(frame_id, []).append(det)
+            frame_detections.setdefault(frame_id, []).append(det) # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
 
-# --- Helper: Compute IoU ---
+# Helper: Compute IoU
 # Problem: BYTETrack doesn't store the class information
 # Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap and grabs its cls_id.
 
@@ -56,7 +54,7 @@ def compute_iou(box1, box2):
 
     return inter_area / union_area if union_area > 0 else 0
 
-# --- Tracking loop ---
+# Tracking loop
 output_lines = []
 
 for frame_id in range(len(image_files)):
@@ -70,18 +68,18 @@ for frame_id in range(len(image_files)):
     else:
         dets_np = np.empty((0, 5), dtype=np.float32)
 
-    tracks = tracker.update(dets_np, img_info=(h, w), img_size=(h, w))
+    tracks = tracker.update(dets_np, img_info=(h, w), img_size=(h, w)) # (original_h, original_w). (resized_h, resized_w)
 
     for t in tracks:
         x1, y1, x2, y2 = t.tlbr
         track_box = [x1, y1, x2, y2]
         track_id = t.track_id
 
-        # --- Match track to original detection by IoU ---
+        # Match track to original detection by IoU
         best_iou = 0
         best_cls_id = -1
         for det in dets:
-            iou = compute_iou(track_box, det[:4])
+            iou = compute_iou(track_box, det[:4]) # matching tracked box (no class info) with detection box (has class info)
             if iou > best_iou:
                 best_iou = iou
                 best_cls_id = int(det[5])
@@ -92,7 +90,7 @@ for frame_id in range(len(image_files)):
         line = f"{frame_id} {track_id} {class_id} 0 0 -1 {x1:.2f} {y1:.2f} {x2:.2f} {y2:.2f} 0 0 0 0"
         output_lines.append(line)
 
-# --- Save output ---
+# Save output
 os.makedirs(os.path.dirname(output_txt), exist_ok=True)
 with open(output_txt, 'w') as f:
     f.write('\n'.join(output_lines))
