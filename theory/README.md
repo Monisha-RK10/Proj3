@@ -6,6 +6,23 @@
 
 ---
 
+## Why BYTETrack:
+Imagine you build a real-time surveillance system:
+
+- YOLO only detects people in each frame.
+
+- BYTETrack gives them unique IDs like “person 1”, “person 2”.
+
+**Without BYTETrack**:
+
+- Every frame would treat people as new -> messy output
+
+**With BYTETrack**:
+
+- You know who is who, across frames -> enables counting, behavior analysis, handoff between systems, etc.
+
+---
+
 ## Metric Explanation
 
 | Metric           | Meaning                                                                    | Real-world Example  |
