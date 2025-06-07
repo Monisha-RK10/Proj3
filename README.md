@@ -30,7 +30,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 ## Pipeline Overview for ROS Deployment
 
 - **Input:** Left camera frames (`image_02/`)
-- - **Steps:**
+- **Steps:**
   -  YOLOv8 detections on each frame.
   -  Filtering logic:
      - car -> keep
