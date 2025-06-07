@@ -16,31 +16,26 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - Real-world driving scenes
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
-## Pipeline Overview for Evaluation
+  
+## Pipeline Overview 
+### Evaluation
 - **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
 - **Steps:**  
-  - **Detection** using YOLOv8
-  - **Tracking** using BYTETrack
+  - **Detection** using YOLOv8 +  **IoU filtering logic** (car -> keep, person with no bike overlap -> pedestrian -> keep)
+  - **Tracking** using BYTETrack on filtered detections +  **Assign class IDs** back to the tracks by matching track boxes with detection boxes using IoU.
   - **Evaluation** using MOTMetrics with KITTI labels and BYTETrack outputs
 - **Output:** Quantitative tracking metrics + annotated tracking video
 
----
-
-## Pipeline Overview for ROS Deployment
-
+### ROS Deployment
 - **Input:** Left camera frames (`image_02/`)
 - **Steps:**
-  -  YOLOv8 detections on each frame.
-  -  Filtering logic:
-     - car -> keep
-     - person + bicycle -> if IoU > threshold -> discard (cyclist)
-     - person with no bike -> pedestrian -> keep
-  -  Visualizing the filtered car and pedestrian boxes.
-  -  Run BYTETrack on filtered detections.
-  -  Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU.
-
+  - **Publish** each frame to the topic
+  - **Susbcribe** to that topic
+    - Perform **Detection** using YOLOv8 for each frame +  **IoU filtering logic** (car -> keep, person with no bike overlap -> pedestrian -> keep)
+    - **Tracking** using BYTETrack on filtered detections + **Assign class IDs** back to the tracks by matching track boxes with detection boxes using IoU
+    - Visualize results on **Rviz**
+---
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
-
 I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. 
 
 | Conf | IDF1  | IDP  | IDR  | Rcll | Prcn | FP  | FN  | IDs | MOTA | Comments |
