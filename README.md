@@ -1,46 +1,32 @@
 # Real-Time Multi-Object Tracking on KITTI using YOLOv8 and BYTETrack with Quantitative Evaluation
 
 This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using:
+- **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
+- **Steps**
+   - **Detection** using YOLO for real-time object detection
+   - **Tracking** using BYTETrack for identity-preserving multi-object tracking
+   - **Evaulation** against the **KITTI Tracking Benchmark** using `motmetrics`)
+   - **Deployment** using ROS2 (Publisher-Subscriber)
+- **Outputs:** Evaluation with MOTMetrics & visualization in Rviz
 
-- **Problem**: Detect & track cars + pedestrians
-- **Challenges**: Cyclist confusion, tracking accuracy:
-  - YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
-  - KITTI has 'Car', 'Pedestrian', 'Cyclist'
-- **Solution**:
-
-YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & bicycle) + BYTETrack (for identity-preserving multi-object tracking) + ROS2 (deployment) + Evaluation (against the **KITTI Tracking Benchmark** using `motmetrics`)
-
-- **Results**:
-   - MOT metrics
-   - Tracking frames in rviz and as gif
 ---
+## Challenges & Solution
+
+**Challenges**:
+- YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
+- KITTI has 'Car', 'Pedestrian', 'Cyclist'
+**Solution**:
+- Cyclist filter (IoU between person & bicycle)
+- Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU
+
+---
+
 ## Dataset
 - **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
 - Real-world driving scenes
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
- --- 
----
-         +-------------+
-        | KITTI Image |
-        +------+------+
-               |
-               v
-        +------+------+
-        |  YOLOv8     |
-        +------+------+
-               |
-       Filter cyclist (IoU logic)
-               |
-               v
-        +------+------+
-        | BYTETrack   |
-        +------+------+
-               |
-     +---------+----------+
-     |                    |
-     v                    v
-Visualize in Rviz   Evaluate with MOTMetrics
+ 
 ----
 ## Pipeline Overview 
 ---
