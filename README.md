@@ -3,28 +3,20 @@
 This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using:
 
 - **Problem**: Detect & track cars + pedestrians
-
 - **Challenges**: Cyclist confusion, tracking accuracy:
   - YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
   - KITTI has 'Car', 'Pedestrian', 'Cyclist'
-
 - **Solution**: YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & bicycle) + BYTETrack (for identity-preserving multi-object tracking) + ROS2 (deployment) + Evaluation (against the **KITTI Tracking Benchmark** using `motmetrics`)
-
 - **Results**:
    - MOT metrics
    - Tracking frames in rviz and as gif
-
 ---
-
 ## Dataset
-
 - **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
 - Real-world driving scenes
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
-
 ## Pipeline Overview for Evaluation
-
 - **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
 - **Steps:**  
   - **Detection** using YOLOv8
