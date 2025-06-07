@@ -10,7 +10,9 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 - **Solution**: YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & bicycle) + BYTETrack (for identity-preserving multi-object tracking) + ROS2 (deployment) + Evaluation (against the **KITTI Tracking Benchmark** using `motmetrics`)
 
-- **Results**: Show tracking frames and MOT metrics
+- **Results**:
+ - MOT metrics
+ - Tracking frames in rviz and as gif
 
 ---
 
