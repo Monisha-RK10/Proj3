@@ -38,7 +38,8 @@ with open(det_file, "r") as f:
         if cls_id in [0, 1, 2]:  # person, bicycle, car (COCO IDs)  3-class filtering happens again
             det = [x1, y1, x2, y2, conf, cls_id]
             frame_detections.setdefault(frame_id, []).append(det) # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
-            # Example: frame_detections = { 0: ["car", "pedestrian"],   1: ["cyclist"]}
+            # Example: frame_detections
+            # { 0: [ [100.0, 150.0, 200.0, 300.0, 0.90, 2] # car,  [50.0, 100.0, 80.0, 180.0, 0.85, 0] # person]}
 
 # Helper: Compute IoU
 # Problem: BYTETrack doesn't store the class information
