@@ -41,6 +41,14 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 > **At conf=0.6**, I achieved the highest IDF1 (62.5%) and a solid MOTA of 15.3% with only 1 mostly lost track. Precision and recall were well balanced (55.6% / 86.2%), and false positives dropped meaningfully. I chose this setting as the optimal point in the precision-recall trade-off for multi-object tracking on KITTI.
 
 ---
+## Observation
+
+| Frame | Person Detected? | Bicycle Detected? | IoU Match | Final Output            |
+| ----- | ---------------- | ----------------- | --------- | ----------------------- |
+| 1–10  | Yes              | Yes               | Yes       | No (filtered out)        |
+| 11–20 | Yes              | No                | No        | Yes (shown as pedestrian) |
+
+---
 
 ## Future Directions
 No appearance cues were used, so tracking is purely IoU-based. There is still room to reduce identity switches and false positives, possibly by:
