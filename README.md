@@ -37,7 +37,8 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
      - person + bicycle -> if IoU > threshold -> discard (cyclist)
      - person with no bike -> pedestrian -> keep
   -  Visualizing the filtered car and pedestrian boxes.
-  -  Integrate BYTETrack and visualize object tracks in ROS.
+  -  Run BYTETrack on filtered detections.
+  -  Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU.
 
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
 
