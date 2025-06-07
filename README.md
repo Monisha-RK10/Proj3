@@ -6,7 +6,10 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - **Challenges**: Cyclist confusion, tracking accuracy:
   - YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
   - KITTI has 'Car', 'Pedestrian', 'Cyclist'
-- **Solution**: YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & bicycle) + BYTETrack (for identity-preserving multi-object tracking) + ROS2 (deployment) + Evaluation (against the **KITTI Tracking Benchmark** using `motmetrics`)
+- **Solution**:
+
+YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & bicycle) + BYTETrack (for identity-preserving multi-object tracking) + ROS2 (deployment) + Evaluation (against the **KITTI Tracking Benchmark** using `motmetrics`)
+
 - **Results**:
    - MOT metrics
    - Tracking frames in rviz and as gif
@@ -34,6 +37,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
   - **Susbcribe** to that topic
     - Perform **Detection** using YOLOv8 for each frame +  **IoU filtering logic** (car -> keep, person with no bike overlap -> pedestrian -> keep)
     - **Tracking** using BYTETrack on filtered detections + **Assign class IDs** back to the tracks by matching track boxes with detection boxes using IoU
+    - **Publish** result to another topic
 - **Output:** Visualize results on **Rviz**
 ---
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
