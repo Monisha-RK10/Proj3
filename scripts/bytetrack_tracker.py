@@ -67,9 +67,9 @@ for frame_id in range(len(image_files)):
 
     dets = frame_detections.get(frame_id, []) # If no detecions, return empty
     if len(dets) > 0:
-        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)
+        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32) # cls_id is removed
     else:
-        dets_np = np.empty((0, 5), dtype=np.float32)
+        dets_np = np.empty((0, 5), dtype=np.float32) # cls_id is removed 
 
     tracks = tracker.update(dets_np, img_info=(h, w), img_size=(h, w)) # (original_h, original_w). (resized_h, resized_w)
 
@@ -81,7 +81,7 @@ for frame_id in range(len(image_files)):
         # Match track to original detection by IoU
         best_iou = 0
         best_cls_id = -1
-        for det in dets:
+        for det in dets: # cls_id is present
             iou = compute_iou(track_box, det[:4]) # matching tracked box (no class info) with detection box (has class info)
             if iou > best_iou:
                 best_iou = iou
