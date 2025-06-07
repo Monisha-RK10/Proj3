@@ -1,23 +1,6 @@
 # Real-Time Multi-Object Tracking on KITTI using YOLOv8 and BYTETrack with Quantitative Evaluation
 
-This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using:
-- **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
-- **Steps**
-   - **Detection** using YOLO for real-time object detection
-   - **Tracking** using BYTETrack for identity-preserving multi-object tracking
-   - **Evaulation** against the **KITTI Tracking Benchmark** using `motmetrics`)
-   - **Deployment** using ROS2 (Publisher-Subscriber)
-- **Outputs:** Evaluation with MOTMetrics & visualization in Rviz
-
----
-## Challenges & Solution
-
-**Challenges**:
-- YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
-- KITTI has 'Car', 'Pedestrian', 'Cyclist'
-**Solution**:
-- Cyclist filter (IoU between person & bicycle)
-- Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU
+This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using YOLOv8 & BYTETrack and deploys it in ROS environment.
 
 ---
 
@@ -28,26 +11,31 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - Used **sequence 0000** for this project
  
 ----
+
+## Challenges & Solution
+
+**Challenges**:
+- YOLO trained on COCO. It has classes like 'car', 'person', 'bicycle'
+- KITTI has 'Car', 'Pedestrian', 'Cyclist'
+  
+**Solution**:
+- Cyclist filter (IoU between person & bicycle)
+- Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU
+
+---
+
 ## Pipeline Overview 
----
-### Evaluation
+
 - **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
-- **Steps:**  
-  - **Detection** using YOLOv8 +  **IoU filtering logic** (car -> keep, person with no bike overlap -> pedestrian -> keep)
-  - **Tracking** using BYTETrack on filtered detections +  **Assign class IDs** back to the tracks by matching track boxes with detection boxes using IoU.
-  - **Evaluation** using MOTMetrics with KITTI labels and BYTETrack outputs
-- **Output:** Quantitative tracking metrics + annotated tracking video
+- **Steps**
+   - **Detection** using YOLO for real-time object detection
+   - **Tracking** using BYTETrack for identity-preserving multi-object tracking
+   - **Evaulation** against the **KITTI Tracking Benchmark** using `motmetrics`)
+   - **Deployment** using ROS2 (Publisher-Subscriber)
+- **Outputs:** Evaluation with MOTMetrics & visualization in Rviz
+
 ---
-### ROS Deployment
-- **Input:** Left camera frames (`image_02/`)
-- **Steps:**
-  - **Publish** each frame to the topic
-  - **Susbcribe** to that topic
-    - Perform **Detection** using YOLOv8 for each frame +  **IoU filtering logic** (car -> keep, person with no bike overlap -> pedestrian -> keep)
-    - **Tracking** using BYTETrack on filtered detections + **Assign class IDs** back to the tracks by matching track boxes with detection boxes using IoU
-    - **Publish** result to another topic
-- **Output:** Visualize results on **Rviz**
----
+
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
 I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. 
 
