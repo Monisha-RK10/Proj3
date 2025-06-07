@@ -44,10 +44,10 @@ def read_tracker_file(file_path):
     return data
 
 def evaluate_mot(gt_data, pred_data):
-    acc = mm.MOTAccumulator(auto_id=True)
+    acc = mm.MOTAccumulator(auto_id=True)        #  Tracks matches frame-by-frame
     for frame_id in sorted(gt_data.keys()):
-        gt_objs = gt_data.get(frame_id, [])
-        pred_objs = pred_data.get(frame_id, [])
+        gt_objs = gt_data.get(frame_id, [])      # GT for this frame
+        pred_objs = pred_data.get(frame_id, [])  # Tracker output
 
         gt_ids = [obj[0] for obj in gt_objs]
         gt_boxes = [obj[1:] for obj in gt_objs]
@@ -55,14 +55,18 @@ def evaluate_mot(gt_data, pred_data):
         pred_ids = [obj[0] for obj in pred_objs]
         pred_boxes = [obj[1:] for obj in pred_objs]
 
+        # Compute pairwise IoU distance matrix (inverted IoU = 1 - IoU), the better the overlap (higher IoU), the lower the distance
         distances = mm.distances.iou_matrix(gt_boxes, pred_boxes, max_iou=0.5)
-        acc.update(gt_ids, pred_ids, distances)
+
+        # Update accumulator with this frame's GT <-> prediction matches
+        # Does matching for that frame using the Hungarian algorithm, then stores those matches to accumulate metrics over all frames.
+        acc.update(gt_ids, pred_ids, distances) # distance[i][j] = 1 - IoU between GT i and Pred j
 
     mh = mm.metrics.create()
     summary = mh.compute(acc, metrics=mm.metrics.motchallenge_metrics, name='summary')
     print(mm.io.render_summary(summary, formatters=mh.formatters, namemap=mm.io.motchallenge_metric_names))
 
-# === Paths ===
+# Paths
 gt_file = '/content/drive/MyDrive/kitti_tracking/data_tracking_label_2/training/label_02/0000.txt'
 pred_file = '/content/drive/MyDrive/kitti_tracking/tracks_bytetrack/0000.txt'
 
