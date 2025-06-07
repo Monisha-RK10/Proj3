@@ -27,7 +27,7 @@ tracker = BYTETracker(args, frame_rate=30)
 image_files = sorted(os.listdir(image_dir))
 
 # Load detections
-frame_detections = dict()
+frame_detections = dict() # grouping detections by frame_id
 with open(det_file, "r") as f:
     for line in f:
         parts = line.strip().split(',')
@@ -64,7 +64,7 @@ for frame_id in range(len(image_files)):
     img = cv2.imread(img_path)
     h, w = img.shape[:2]
 
-    dets = frame_detections.get(frame_id, []) # If no detecions. return empty
+    dets = frame_detections.get(frame_id, []) # If no detecions, return empty
     if len(dets) > 0:
         dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)
     else:
