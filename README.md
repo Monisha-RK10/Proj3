@@ -15,7 +15,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
 
-## Pipeline Overview
+## Pipeline Overview for Evaluation
 
 - **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
 - **Steps:**  
@@ -26,6 +26,18 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 
 
 ---
+
+## Pipeline Overview for ROS Deployment
+
+- **Input:** Left camera frames (`image_02/`)
+- - **Steps:**
+  -  YOLOv8 detections on each frame.
+  -  Filtering logic:
+     - car -> keep
+     - person + bicycle -> if IoU > threshold -> discard (cyclist)
+     - person with no bike -> pedestrian -> keep
+  -  Visualizing the filtered car and pedestrian boxes.
+  -  Integrate BYTETrack and visualize object tracks in ROS.
 
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
 
