@@ -20,6 +20,28 @@ YOLOv8 (for real-time object detection) + Cyclist filter (IoU between person & b
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
  --- 
+
+         +-------------+
+        | KITTI Image |
+        +------+------+
+               |
+               v
+        +------+------+
+        |  YOLOv8     |
+        +------+------+
+               |
+       Filter cyclist (IoU logic)
+               |
+               v
+        +------+------+
+        | BYTETrack   |
+        +------+------+
+               |
+     +---------+----------+
+     |                    |
+     v                    v
+Visualize in Rviz   Evaluate with MOTMetrics
+
 ## Pipeline Overview 
 ---
 ### Evaluation
