@@ -62,10 +62,19 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 ---
 ## Observation
 
-| Frame | Person Detected? | Bicycle Detected? | IoU Match | Final Output            |
-| ----- | ---------------- | ----------------- | --------- | ----------------------- |
-| 1–10  | Yes              | Yes               | Yes       | No (filtered out)        |
-| 11–20 | Yes              | No                | No        | Yes (shown as pedestrian) |
+- MOTA improves from 41.9% to 55.8% as the threshold is raised
+  - Fewer False Positives (FP): The model becomes more confident, reducing junk detections.
+  - Recall suffers at conf=0.7 -> more False Negatives (FN) (missed detections).
+ 
+- IDF1 and IDP/IDR trend
+   - IDF1 peaks at 71.6% (conf=0.6)
+   - IDP continues improving even at 0.7 (up to 78.4%) -> precision is best when it is the most strict
+   - IDR drops at 0.7 -> lower recall
+ 
+- Tracking IDs
+  - ID switches (IDs) stay between 7 and 9, tracking is stable overall.
+  - Mostly Tracked (MT) goes from 9 to 3 at conf=0.7 -> missing many tracklets.
+  - At conf=0.6, 8 MT and just 1 ML -> best balance.
 
 ---
 
