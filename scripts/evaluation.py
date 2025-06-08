@@ -9,7 +9,7 @@ if not hasattr(np, 'asfarray'):
 import motmetrics as mm
 import os
 
-ALLOWED_CLASSES = ["Car", "Pedestrian", "Cyclist"]
+ALLOWED_CLASSES = ["Car", "Pedestrian"] #, "Cyclist"]
 
 def read_kitti_gt_file(file_path, allowed_classes):
     data = {}
