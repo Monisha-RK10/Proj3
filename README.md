@@ -19,14 +19,12 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - YOLOv8 (COCO) has `person`, `car`, `bicycle`
 - KITTI expects `Car`, `Pedestrian`, `Cyclist`
 
-**Solution:**  
-- Implemented a **cyclist filter**: if IoU between `person` and `bicycle` is high → label as `Cyclist`
+**Solution:** Implemented a **cyclist filter**, if IoU between `person` and `bicycle` is high → discard as `Cyclist`
 
 ### Challenge 2: BYTETrack ignores class labels
 - BYTETrack only tracks bounding boxes
 
-**Solution:**  
-- After tracking, reassign **class IDs** to each track by matching with original YOLO detections using IoU
+**Solution:** After tracking, reassign **class IDs** to each track by matching with original YOLO detections using IoU
 
 ---
 
