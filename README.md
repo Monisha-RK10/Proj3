@@ -1,8 +1,8 @@
 # ROS2-Based Real-Time Multi Object Tracking on KITTI with YOLOv8 and BYTETrack
 
-> This project implements a real-time multi-object tracking (MOT) pipeline for autonomous driving scenarios using YOLOv8 for detection and BYTETrack for tracking. It supports class-wise filtering (e.g., cyclists), quantitative evaluation using MOTMetrics, and deployment via ROS2. Built on the KITTI tracking benchmark, the pipeline is modular and optimized for experimentation and real-world usage.
+> This project implements a real-time multi-object tracking (MOT) pipeline for autonomous driving scenarios using **YOLOv8** for detection and **BYTETrack** for tracking. It supports **class-wise filtering** (e.g., cyclists), quantitative evaluation using **MOTMetrics**, and deployment via **ROS2**. Built on the **KITTI tracking benchmark**, the pipeline is modular and optimized for experimentation and real-world usage.
 >
-> During evaluation, multiple detection confidence thresholds (0.25, 0.5, and 0.7) were tested to analyze their impact on MOT metrics such as MOTA, ID switches, and fragmentations. Lower thresholds increased recall but introduced more false positives, while higher thresholds improved precision but led to more missed detections.
+> During evaluation, multiple detection confidence thresholds **(0.3 to 0.7)** were tested to analyze their impact on MOT metrics such as MOTA, ID switches, and fragmentations. Lower thresholds increased recall but introduced more false positives, while higher thresholds improved precision but led to more missed detections.
 
 ## Dataset
 - **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
