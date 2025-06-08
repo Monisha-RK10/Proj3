@@ -15,13 +15,15 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 ## Challenges & Solution
 
 **Challenges**:
-`Class mismatch`
-- YOLO is trained on COCO, which has classes like 'car', 'person', 'bicycle' (**No Cyclist**). However, KITTI has classes like 'Car', 'Pedestrian', 'Cyclist'.
-`No class label for BYTETrack`
-- BYTETrack does not consider class label while tracking`
-- 
+
+`Class mismatch`: YOLO is trained on COCO, which has classes like 'car', 'person', 'bicycle' (**No Cyclist**). However, KITTI has classes like 'Car', 'Pedestrian', 'Cyclist'.
+
+`No class label for BYTETrack`: BYTETrack does not consider class label while tracking
+
 **Solution**:
+
 `Class mismatch`: Cyclist filter (IoU between person & bicycle)
+
 `class label for BYTETrack`: Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU
 
 ---
