@@ -57,21 +57,25 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 | 0.7  | **55.8%** | 69.9%     | **78.4%** | 63.0% | **28** | **80** | 9   | 11 (3 MT, 7 PT, 1 ML) |
 
 
-> **At conf=0.6**, I achieved the highest IDF1 (62.5%) and a solid MOTA of 15.3% with only 1 mostly lost track. Precision and recall were well balanced (55.6% / 86.2%), and false positives dropped meaningfully. I chose this setting as the optimal point in the precision-recall trade-off for multi-object tracking on KITTI.
+> **conf = 0.6** is the best overall point:
+> Highest IDF1
+> Best MOTA
+> Reasonable FP / FN balance
+> Strong MT count
 
 ---
 ## Observation
 
-- MOTA improves from 41.9% to 55.8% as the threshold is raised
-  - Fewer False Positives (FP): The model becomes more confident, reducing junk detections.
-  - Recall suffers at conf=0.7 -> more False Negatives (FN) (missed detections).
+- **MOTA improves from 41.9% to 55.8%** as the threshold is raised
+  - Fewer False Positives (FP): Model becomes more confident, reducing junk detections.
+  - Recall suffers at conf=0.7: More False Negatives (FN) (missed detections).
  
-- IDF1 and IDP/IDR trend
+- **IDF1 and IDP/IDR trend**
    - IDF1 peaks at 71.6% (conf=0.6)
    - IDP continues improving even at 0.7 (up to 78.4%) -> precision is best when it is the most strict
    - IDR drops at 0.7 -> lower recall
  
-- Tracking IDs
+- **Tracking IDs**
   - ID switches (IDs) stay between 7 and 9, tracking is stable overall.
   - Mostly Tracked (MT) goes from 9 to 3 at conf=0.7 -> missing many tracklets.
   - At conf=0.6, 8 MT and just 1 ML -> best balance.
