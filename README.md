@@ -1,42 +1,48 @@
-# Real-Time Multi-Object Tracking on KITTI using YOLOv8 and BYTETrack with Quantitative Evaluation
+# Real-Time MOT for Autonomous Driving using YOLOv8 + BYTETrack on KITTI: Cyclist Filtering + Quantitative Evaluation + ROS2 Deployment
 
-This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using YOLOv8 & BYTETrack and deploys it in ROS environment.
+This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using YOLOv8 for real-time object detection, BYTETrack for identity-preserving tracking, quantitative evaluation using MOTMetrics, and ROS2 for deployment.
+
 
 ---
 
 ## Dataset
 - **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
-- Real-world driving scenes
+- Real-world driving scenes captured from a moving vehicle
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
 - Used **sequence 0000** for this project
- 
+  
 ----
 
 ## Challenges & Solutions
 
-**Challenges**:
+### Challenge 1: Class mismatch
+- YOLOv8 (COCO) has `person`, `car`, `bicycle`
+- KITTI expects `Car`, `Pedestrian`, `Cyclist`
 
-- **Class mismatch:** YOLO is trained on COCO, which has classes like 'car', 'person', 'bicycle' (**No Cyclist**). However, KITTI has classes like 'Car', 'Pedestrian', 'Cyclist'.
-  
-- **No class label for BYTETrack:** BYTETrack does not consider class label while tracking
+**Solution:**  
+- Implemented a **cyclist filter**: if IoU between `person` and `bicycle` is high → label as `Cyclist`
 
-**Solutions**:
+### Challenge 2: BYTETrack ignores class labels
+- BYTETrack only tracks bounding boxes
 
-- **Class mismatch:** Cyclist filter (IoU between person & bicycle)
-
-- **Class label for BYTETrack:** Assign class IDs back to the tracks by matching track boxes with detection boxes using IoU
+**Solution:**  
+- After tracking, reassign **class IDs** to each track by matching with original YOLO detections using IoU
 
 ---
 
+
 ## Pipeline Overview 
 
-- **Input:** Left camera frames (`image_02/`) and KITTI tracking labels (`label_02/`)
-- **Steps**
-   - **Detection** using YOLO for real-time object detection
-   - **Tracking** using BYTETrack for identity-preserving multi-object tracking
-   - **Evaulation** against the **KITTI Tracking Benchmark** using `motmetrics`)
-   - **Deployment** using ROS2 (Publisher-Subscriber)
-- **Outputs:** Evaluation with MOTMetrics & visualization in Rviz
+
+- **Input:** Left camera frames (`image_02/`) + KITTI labels (`label_02/`)
+- **Steps:**
+  - **Detection:** YOLOv8 for object detection
+  - **Cyclist Filter:** Match `person` and `bicycle` using IoU
+  - **Tracking:** BYTETrack with filtered detections
+  - **Class ID assignment:** Match tracked boxes with original detection boxes
+  - **Evaluation:** Compare against KITTI labels using `motmetrics`
+  - **Deployment:** ROS2 publisher → subscriber → detection + tracking → publish result
+- **Output:** MOT metrics + tracked frames visualized in **Rviz**
 
 ---
 
