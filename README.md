@@ -73,6 +73,10 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 - Using depth-aware filtering to improve spatial consistency
 - Filtering out very low-confidence boxes
 
+## Rviz Output
+
+<img src="videos/rviz_output" width="1000"/>
+
 ## Demo Video
 
 <p align="center">
