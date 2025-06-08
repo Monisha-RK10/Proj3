@@ -75,7 +75,7 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 
 ## Rviz Output
 
-<img src="videos/rviz_output.png" width="150"/>
+<img src="videos/rviz_output.png" width="250"/>
 
 ## Demo Video
 
