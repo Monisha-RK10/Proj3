@@ -1,4 +1,4 @@
-# Real-Time MOT using YOLOv8 & BYTETrack on KITTI: Cyclist Filtering + Quantitative Evaluation + ROS2 Deployment
+# Real-Time MOT using YOLOv8 & BYTETrack on KITTI: Cyclist Filtering, Evaluation, & ROS2 Deployment
 
 This project implements a **tracking-by-detection** pipeline for autonomous driving scenarios using YOLOv8 for real-time object detection, BYTETrack for identity-preserving tracking, quantitative evaluation using MOTMetrics, and ROS2 for deployment.
 
