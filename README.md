@@ -47,12 +47,15 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
 I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 0.8. Below are the key MOT metrics across settings. 
 
-| Conf | IDF1  | IDP  | IDR  | Rcll | Prcn | FP  | FN  | IDs | MOTA | Comments |
-|------|-------|------|------|------|------|-----|-----|------|------|----------|
-| 0.5  | 60.0% | 47.7% | 80.7% | 89.3% | 52.8% | 334 | 45  | 9  | 7.4%  | Good balance |
-| 0.6  | 62.5% | 51.5% | 79.7% | 86.2% | 55.6% | 288 | 58  | 9  | 15.3% | **Best IDF1**, slightly more FN |
-| 0.7  | 60.7% | 57.0% | 64.9% | 70.6% | 62.1% | 181 | 123 | 12 | 24.6% | Too many missed GTs (FN↑) |
-| 0.8  | 43.2% | 58.1% | 34.4% | 39.4% | 66.5% | 83  | 254 | 10 | 17.2% | FN very high, recall broken |
+
+| Conf | MOTA      | IDF1      | IDP       | IDR   | FP     | FN     | IDs | GT MT/PT/ML           |
+| ---- | --------- | --------- | --------- | ----- | ------ | ------ | --- | --------------------- |
+| 0.3  | 41.9%     | 66.7%     | 59.2%     | 76.2% | 111    | 35     | 8   | 11 (9 MT, 1 PT, 1 ML) |
+| 0.4  | 44.5%     | 67.3%     | 60.1%     | 76.6% | 106    | 33     | 8   | -                     |
+| 0.5  | 46.8%     | 68.2%     | 61.5%     | 76.6% | 99     | 34     | 8   | -                     |
+| 0.6  | **55.8%** | **71.6%** | 67.6%     | 76.2% | 72     | 38     | 7   | -                     |
+| 0.7  | **55.8%** | 69.9%     | **78.4%** | 63.0% | **28** | **80** | 9   | 11 (3 MT, 7 PT, 1 ML) |
+
 
 > **At conf=0.6**, I achieved the highest IDF1 (62.5%) and a solid MOTA of 15.3% with only 1 mostly lost track. Precision and recall were well balanced (55.6% / 86.2%), and false positives dropped meaningfully. I chose this setting as the optimal point in the precision-recall trade-off for multi-object tracking on KITTI.
 
