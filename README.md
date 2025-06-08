@@ -63,7 +63,6 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.3 to 
 ## Observation
 
 <img src="videos/Effect_of_Conf_Thresh.png" width="800"/>
-
 - **MOTA improves from 41.9% to 55.8%** as the threshold is raised
   - Fewer False Positives (FP): Model becomes more confident, reducing junk detections.
   - Recall suffers at conf=0.7: More False Negatives (FN) (missed detections).
