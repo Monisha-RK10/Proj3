@@ -57,15 +57,7 @@ I evaluated the effect of varying the confidence threshold (`conf`) from 0.5 to 
 | 0.7  | **55.8%** | 69.9%     | **78.4%** | 63.0% | **28** | **80** | 9   | 11 (3 MT, 7 PT, 1 ML) |
 
 
-> **conf = 0.6** is the best overall point:
-> 
-> Highest IDF1
-> 
-> Best MOTA
-> 
-> Reasonable FP / FN balance
-> 
-> Strong MT count
+> **conf = 0.6** is the best overall point: Highest IDF1, best MOTA, reasonable FP / FN balance, and strong MT count
 
 ---
 ## Observation
