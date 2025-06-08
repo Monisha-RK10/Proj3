@@ -39,7 +39,7 @@
   - **Class ID assignment:** Match tracked boxes with original detection boxes
   - **Evaluation:** Compare against KITTI labels using `motmetrics`
   - **Deployment:** ROS2 publisher → subscriber → detection + tracking → publish result
-- **Output:** MOT metrics + tracked frames visualized in **Rviz**
+- **Output:** **MOT metrics** + tracked frames visualized in **Rviz**
 
 ---
 
