@@ -9,7 +9,7 @@ This project implements a **tracking-by-detection** pipeline for autonomous driv
 - **[KITTI Tracking Dataset](http://www.cvlibs.net/datasets/kitti/eval_tracking.php)**
 - Real-world driving scenes captured from a moving vehicle
 - Annotated bounding boxes for object categories like `Car`, `Pedestrian`, and `Cyclist`
-- Used **sequence 0000** for this project
+- Used 'sequence 0000' for this project
   
 ----
 
