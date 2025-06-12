@@ -5,7 +5,7 @@
 # Writes results in KITTI format for evaluation.
 # Note: 
 # 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
-# 2) Fallback is considered ('car') for class assignment when IoU < 0.3.
+# 2) Fallback is considered ('car') for class assignment when IoU < 0.3. A class-aware tracker or fused re-ID may improve this
 
 import os
 import cv2
