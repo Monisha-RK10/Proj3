@@ -21,33 +21,33 @@ def read_kitti_gt_file(file_path, allowed_classes):
             obj_type = fields[2]
             if obj_type not in allowed_classes:
                 continue
-            bbox = list(map(float, fields[6:10]))  # [x1, y1, x2, y2]
+            bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
                 data[frame_id] = []
-            data[frame_id].append([track_id] + bbox) # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] }
+            data[frame_id].append([track_id] + bbox)                                                    # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] } 
     return data
 
-def read_tracker_file(file_path):
+def read_tracker_file(file_path):                                                                       # not reading the class id 
     data = {}
     with open(file_path, 'r') as f:
         for line in f:
             fields = line.strip().split(',')
             if len(fields) < 7:
-                fields = line.strip().split()  # support space-separated
+                fields = line.strip().split()                                                           # support space-separated
             frame_id = int(fields[0])
             track_id = int(fields[1])
-            bbox = list(map(float, fields[6:10]))  # [x1, y1, x2, y2]
+            bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
                 data[frame_id] = []
-            data[frame_id].append([track_id] + bbox) # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] }
+            data[frame_id].append([track_id] + bbox)                                                     # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] }  
 
     return data
 
 def evaluate_mot(gt_data, pred_data):
-    acc = mm.MOTAccumulator(auto_id=True)        #  Tracks matches frame-by-frame
+    acc = mm.MOTAccumulator(auto_id=True)                                                                #  Tracks matches frame-by-frame
     for frame_id in sorted(gt_data.keys()):
-        gt_objs = gt_data.get(frame_id, [])      # GT for this frame
-        pred_objs = pred_data.get(frame_id, [])  # Tracker output
+        gt_objs = gt_data.get(frame_id, [])                                                              # GT for this frame
+        pred_objs = pred_data.get(frame_id, [])                                                          # Tracker output
 
         gt_ids = [obj[0] for obj in gt_objs]
         gt_boxes = [obj[1:] for obj in gt_objs]
