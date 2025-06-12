@@ -9,7 +9,7 @@ This folder contains three types of input files used in the project:
 ## Format Specifications
 
 ### 1. KITTI Ground Truth Format
-Used for YOLOv8 training and tracking evaluation.
+Used for YOLOv8 tracking evaluation.
 
 `frame id | track id | class | trunc | occ | alpha | bbox left | top | right | bottom | ...3D info...`
 
