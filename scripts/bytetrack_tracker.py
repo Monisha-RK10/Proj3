@@ -73,9 +73,9 @@ for frame_id in range(len(image_files)):
 
     dets = frame_detections.get(frame_id, []) # If no detecions, return empty
     if len(dets) > 0:
-        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)   # cls_id is removed, ** is used for dictionaries, * is used for lists or tuples
+        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)    # cls_id is removed, ** is used for dictionaries, * is used for lists or tuples
     else:
-        dets_np = np.empty((0, 5), dtype=np.float32)                           # cls_id is removed 
+        dets_np = np.empty((0, 5), dtype=np.float32)                            # cls_id is removed 
 
     tracks = tracker.update(dets_np, img_info=(h, w), img_size=(h, w))          # (original_h, original_w). (resized_h, resized_w)
 
@@ -94,7 +94,7 @@ for frame_id in range(len(image_files)):
                 best_cls_id = int(det[5])                                       # get class ID of best-matching YOLO box
 
         # Fallback if no good match
-        class_id = best_cls_id if best_iou > 0.3 else 2                          # 2 = car default
+        class_id = best_cls_id if best_iou > 0.3 else 2                         # 2 = car default
 
         line = f"{frame_id} {track_id} {class_id} 0 0 -1 {x1:.2f} {y1:.2f} {x2:.2f} {y2:.2f} 0 0 0 0"
         output_lines.append(line)
