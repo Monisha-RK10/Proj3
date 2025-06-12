@@ -44,7 +44,7 @@ def read_tracker_file(file_path):                                               
     return data
 
 def evaluate_mot(gt_data, pred_data):
-    acc = mm.MOTAccumulator(auto_id=True)                                                                #  Tracks matches frame-by-frame
+    acc = mm.MOTAccumulator(auto_id=True)                                                                # Automatically assign internal IDs to detections that aren't explicitly matched, tracks matches frame-by-frame
     for frame_id in sorted(gt_data.keys()):
         gt_objs = gt_data.get(frame_id, [])                                                              # GT for this frame
         pred_objs = pred_data.get(frame_id, [])                                                          # Tracker output
