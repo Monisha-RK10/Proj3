@@ -44,7 +44,7 @@
 ---
 
 ## Detection Confidence Tuning Results (YOLOv8 + BYTETrack)
-I evaluated the effect of varying the confidence threshold (`conf`) from 0.3 to 0.8. Below are the key MOT metrics across settings. 
+I evaluated the effect of varying the confidence threshold (`conf`) from 0.3 to 0.7. Below are the key MOT metrics across settings. 
 
 
 | Conf | MOTA      | IDF1      | IDP       | IDR   | FP     | FN     | IDs | GT MT/PT/ML           |
