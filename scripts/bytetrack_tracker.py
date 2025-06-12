@@ -3,6 +3,11 @@
 # Updates tracker for detection done by YOLOv8 for specific classes (YOLO gives detections, BYTETrack uses detections + history to match or create tracks.),
 # Computes IoU between track box & all detections to assign class, and
 # Writes results in KITTI format for evaluation.
+
+# Helper: Compute IoU
+# Problem: BYTETrack doesn't store the class information
+# Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap and grabs its cls_id.
+
 # Note: 
 # 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
 # 2) Fallback is considered ('car') for class assignment when IoU < 0.3. A class-aware tracker or fused re-ID may improve this
@@ -45,10 +50,7 @@ with open(det_file, "r") as f:
             # Example: frame_detections
             # { 0: [ [100.0, 150.0, 200.0, 300.0, 0.90, 2] # car,  [50.0, 100.0, 80.0, 180.0, 0.85, 0] # person]}
 
-# Helper: Compute IoU
-# Problem: BYTETrack doesn't store the class information
-# Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap and grabs its cls_id.
-
+# Compute IoU between track box and det box
 def compute_iou(box1, box2):
     # x1 y1 x2 y2 i.e., 0, 1, 2, 3. max for x1, y1 and min for x2, y2 between box1 and box2
     xi1, yi1 = max(box1[0], box2[0]), max(box1[1], box2[1])         # top-left of intersection (max)
