@@ -10,7 +10,7 @@
 
 # Note: 
 # 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
-# 2) Fallback is considered ('car') for class assignment when IoU < 0.3. A class-aware tracker or fused re-ID may improve this
+# 2) Fallback is considered ('car') for class assignment when IoU for best match < 0.3. A class-aware tracker or fused re-ID may improve this. Reason: In KITTI, most false unmatched tracks are likely cars. It is a design tradeoff to avoid losing potentially valuable tracklets, though it may impact evaluation.
 
 import os
 import cv2
