@@ -11,12 +11,12 @@ from types import SimpleNamespace
 from yolox.tracker.byte_tracker import BYTETracker
 
 # Config (Object-style config)
-args = SimpleNamespace(  # quick way to create an object with attributes instead of a dictionary
-    track_thresh=0.5,    # detection confidence threshold, higher = fewer detections, but more reliable
-    track_buffer=30,     # how long to keep a lost track, helps in occlusion recovery (if a car is hidden briefly)
-    match_thresh=0.8,    # IOU threshold for associating new detections with existing tracks, higher = stricter match, may lose fast-moving objects
-    mot20=False,         # use MOT20-specific thresholds
-    min_box_area=100     # filter very small boxes
+args = SimpleNamespace(                                           # quick way to create an object with attributes instead of a dictionary
+    track_thresh=0.5,                                             # detection confidence threshold, higher = fewer detections, but more reliable
+    track_buffer=30,                                              # how long to keep a lost track, helps in occlusion recovery (if a car is hidden briefly)
+    match_thresh=0.8,                                             # IOU threshold for associating new detections with existing tracks, higher = stricter match, may lose fast-moving objects
+    mot20=False,                                                  # use MOT20-specific thresholds
+    min_box_area=100                                              # filter very small boxes
 )
 image_dir = "/content/drive/MyDrive/kitti_tracking/data_tracking_image_2/training/image_02/0000"
 det_file = "/content/0000.txt"
@@ -27,7 +27,7 @@ tracker = BYTETracker(args, frame_rate=30)
 image_files = sorted(os.listdir(image_dir))
 
 # Load detections
-frame_detections = dict() # grouping detections by frame_id
+frame_detections = dict()                                          # grouping detections by frame_id
 with open(det_file, "r") as f:
     for line in f:
         parts = line.strip().split(',')
@@ -35,9 +35,10 @@ with open(det_file, "r") as f:
         x1, y1, x2, y2 = map(float, parts[2:6])
         conf = float(parts[6])
         cls_id = int(parts[7])
-        if cls_id in [0, 1, 2]:  # person, bicycle, car (COCO IDs)  3-class filtering happens again
+        if cls_id in [0, 1, 2]:                                     # person, bicycle, car (COCO IDs)  3-class filtering happens again
             det = [x1, y1, x2, y2, conf, cls_id]
-            frame_detections.setdefault(frame_id, []).append(det) # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
+            frame_detections.setdefault(frame_id, []).append(det)   # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
+  
             # Example: frame_detections
             # { 0: [ [100.0, 150.0, 200.0, 300.0, 0.90, 2] # car,  [50.0, 100.0, 80.0, 180.0, 0.85, 0] # person]}
 
@@ -47,9 +48,9 @@ with open(det_file, "r") as f:
 
 def compute_iou(box1, box2):
     # tl(max): x1[0], y1[1], br(min): x2[2], y2[3]
-    xi1, yi1 = max(box1[0], box2[0]), max(box1[1], box2[1])  # top-left of intersection (max)
-    xi2, yi2 = min(box1[2], box2[2]), min(box1[3], box2[3])  # bottom-right of intersection (min)
-    inter_area = max(0, xi2 - xi1) * max(0, yi2 - yi1)       # width × height
+    xi1, yi1 = max(box1[0], box2[0]), max(box1[1], box2[1])         # top-left of intersection (max)
+    xi2, yi2 = min(box1[2], box2[2]), min(box1[3], box2[3])         # bottom-right of intersection (min)
+    inter_area = max(0, xi2 - xi1) * max(0, yi2 - yi1)              # width × height
 
     box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
     box2_area = (box2[2] - box2[0]) * (box2[3] - box2[1])
