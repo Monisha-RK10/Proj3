@@ -3,6 +3,7 @@
 # Updates tracker for detection done by YOLOv8 for specific classes (YOLO gives detections, BYTETrack uses detections + history to match or create tracks.),
 # Computes IoU between track box & all detections to assign class, and
 # Writes results in KITTI format for evaluation.
+# Note: low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
 
 import os
 import cv2
@@ -68,7 +69,7 @@ for frame_id in range(len(image_files)):
 
     dets = frame_detections.get(frame_id, []) # If no detecions, return empty
     if len(dets) > 0:
-        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32) # cls_id is removed
+        dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32) # cls_id is removed, ** is used for dictionaries, * is used for lists or tuples
     else:
         dets_np = np.empty((0, 5), dtype=np.float32) # cls_id is removed 
 
