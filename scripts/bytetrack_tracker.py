@@ -11,12 +11,12 @@ from types import SimpleNamespace
 from yolox.tracker.byte_tracker import BYTETracker
 
 # Config (Object-style config)
-args = SimpleNamespace(                                           # quick way to create an object with attributes instead of a dictionary
-    track_thresh=0.5,                                             # detection confidence threshold, higher = fewer detections, but more reliable
-    track_buffer=30,                                              # how long to keep a lost track, helps in occlusion recovery (if a car is hidden briefly)
-    match_thresh=0.8,                                             # IOU threshold for associating new detections with existing tracks, higher = stricter match, may lose fast-moving objects
-    mot20=False,                                                  # use MOT20-specific thresholds
-    min_box_area=100                                              # filter very small boxes
+args = SimpleNamespace(                                            # quick way to create an object with attributes instead of a dictionary
+    track_thresh=0.5,                                              # detection confidence threshold, higher = fewer detections, but more reliable
+    track_buffer=30,                                               # how long to keep a lost track, helps in occlusion recovery (if a car is hidden briefly)
+    match_thresh=0.8,                                              # IOU threshold for associating new detections with existing tracks, higher = stricter match, may lose fast-moving objects
+    mot20=False,                                                   # use MOT20-specific thresholds
+    min_box_area=100                                               # filter very small boxes
 )
 image_dir = "/content/drive/MyDrive/kitti_tracking/data_tracking_image_2/training/image_02/0000"
 det_file = "/content/0000.txt"
@@ -27,7 +27,7 @@ tracker = BYTETracker(args, frame_rate=30)
 image_files = sorted(os.listdir(image_dir))
 
 # Load detections
-frame_detections = dict()                                          # grouping detections by frame_id
+frame_detections = dict()                                           # grouping detections by frame_id
 with open(det_file, "r") as f:
     for line in f:
         parts = line.strip().split(',')
