@@ -83,11 +83,11 @@ for frame_id in range(len(image_files)):
         # Match track to original detection by IoU
         best_iou = 0
         best_cls_id = -1
-        for det in dets: # cls_id is present
+        for det in dets:                                                        # dets = YOLO detections for this frame, cls_id is present
             iou = compute_iou(track_box, det[:4])                               # matching tracked box (no class info) with detection box (has class info)
             if iou > best_iou:
                 best_iou = iou
-                best_cls_id = int(det[5])
+                best_cls_id = int(det[5])                                       # get class ID of best-matching YOLO box
 
         # Fallback if no good match
         class_id = best_cls_id if best_iou > 0.3 else 2                          # 2 = car default
