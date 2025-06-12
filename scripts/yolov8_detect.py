@@ -59,7 +59,7 @@ for filename in sorted(os.listdir(input_folder)):
 
         matched_person_indices = set()
         for bi in bicycles:
-            for i, pi in enumerate(persons):
+            for i, pi in enumerate(persons):                                                              # Example: persons = [p1, p2, p3]  # 3 persons, bicycles = [b1], If b1 overlaps with p2, then: matched_person_indices = {1}
                 iou = compute_iou(bi[:4], pi[:4])
                 if iou > 0.4:  # Cyclist detected
                     matched_person_indices.add(i)
