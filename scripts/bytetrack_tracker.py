@@ -71,7 +71,7 @@ for frame_id in range(len(image_files)):
     img = cv2.imread(img_path)
     h, w = img.shape[:2]
 
-    dets = frame_detections.get(frame_id, []) # If no detecions, return empty
+    dets = frame_detections.get(frame_id, [])                                   # If no detecions, return empty
     if len(dets) > 0:
         dets_np = np.array([[*d[:4], d[4]] for d in dets], dtype=np.float32)    # cls_id is removed, ** is used for dictionaries, * is used for lists or tuples
     else:
