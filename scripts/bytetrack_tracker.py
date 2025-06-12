@@ -3,7 +3,9 @@
 # Updates tracker for detection done by YOLOv8 for specific classes (YOLO gives detections, BYTETrack uses detections + history to match or create tracks.),
 # Computes IoU between track box & all detections to assign class, and
 # Writes results in KITTI format for evaluation.
-# Note: low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
+# Note: 
+# 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
+# 2) Fallback is considered ('car') for class assignment when IoU < 0.3.
 
 import os
 import cv2
