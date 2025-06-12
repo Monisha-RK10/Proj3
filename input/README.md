@@ -2,7 +2,7 @@
 
 This folder contains three types of input files used in the project:
 
-- `kitti_label/` — Ground truth labels used for YOLOv8 training and tracking evaluation.
+- `kitti_label/` — Ground truth labels used for tracking evaluation.
 - `detection_file/` — Detections from the YOLOv8 model, formatted for BYTETrack.
 - `tracker_file/` — Tracker output from BYTETrack, formatted for KITTI tracking evaluation.
 
