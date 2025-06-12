@@ -1,4 +1,4 @@
-# Real-Time Multi-Object Tracking with ROS 2 & YOLOv8 & BYTETrack on KITTI
+# Real-Time Multi-Object Tracking with ROS 2 + YOLOv8 + BYTETrack on KITTI
 
 > This project implements a real-time multi-object tracking (MOT) pipeline for autonomous driving scenarios using **YOLOv8** for detection and **BYTETrack** for tracking. It supports **class-wise filtering** (e.g., cyclists), quantitative evaluation using **MOTMetrics**, and deployment via **ROS2**. Built on the **KITTI tracking benchmark**, the pipeline is modular and optimized for experimentation and real-world usage.
 >
