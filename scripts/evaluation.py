@@ -10,6 +10,7 @@ import motmetrics as mm
 import os
 
 ALLOWED_CLASSES = ["Car", "Pedestrian"] #, "Cyclist"]
+ALLOWED_CLASS_IDS = [0, 2]  # 0 = person (Pedestrian), 2 = car
 
 def read_kitti_gt_file(file_path, allowed_classes):
     data = {}
@@ -36,6 +37,11 @@ def read_tracker_file(file_path):                                               
                 fields = line.strip().split()                                                           # support space-separated
             frame_id = int(fields[0])
             track_id = int(fields[1])
+            class_id = int(fields[2])
+            
+            if class_id not in ALLOWED_CLASS_IDS:
+                continue  # discard bicycles or misclassed detections
+                
             bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
                 data[frame_id] = []
