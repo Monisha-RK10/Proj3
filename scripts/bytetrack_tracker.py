@@ -43,7 +43,7 @@ with open(det_file, "r") as f:
         x1, y1, x2, y2 = map(float, parts[2:6])
         conf = float(parts[6])
         cls_id = int(parts[7])
-        if cls_id in [0, 1, 2]:                                     # person, bicycle, car (COCO IDs)  3-class filtering happens again
+        if cls_id in [0, 2]:                                     # person, bicycle, car (COCO IDs)  3-class filtering happens again
             det = [x1, y1, x2, y2, conf, cls_id]
             frame_detections.setdefault(frame_id, []).append(det)   # If frame_id doesn’t exist, create it with an empty list, else frame_detections[frame_id].append(det)
   
