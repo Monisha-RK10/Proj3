@@ -1,6 +1,6 @@
 # Step 2: Run tracker on all the detection from YOLOv8
 # This function does the following:
-# Updates tracker for detection done by YOLOv8 for specific classes,
+# Updates tracker for detection done by YOLOv8 for specific classes (YOLO gives detections, BYTETrack uses detections + history to match or create tracks.),
 # Computes IoU between track box & all detections to assign class, and
 # Writes results in KITTI format for evaluation.
 
