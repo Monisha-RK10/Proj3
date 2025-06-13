@@ -1,4 +1,13 @@
 # Step 3: Evaluate tracker
+# Kitti ground truth has many classes such as 'Dont Care', 'Van', 'Cyclist'. For this project, only 'Car' and 'Pedestrian' are filtered.
+# BYTETrack file has class IDs 0 and 2 which correspond to person and car as per COCO-ID
+
+# This piece of code does the following:
+# Get the filtered GT and pred.
+# Separate track ID and boxes for both GT and pred.
+# Computes pairwise IoU distance matrix between GT and pred boxes.
+# Update accumulator using this distance for track IDs of GT and pred boxes.
+# Print the metrics.
 
 import motmetrics as mm
 import os
