@@ -17,6 +17,7 @@ This folder contains ROS2 nodes used to deploy the real-time multi-object tracki
   - Cyclist filtering (IoU between `person` and `bicycle`)
   - BYTETrack for tracking
   - Assigns class IDs back using IoU
+  - Visualizes tracked objects with bounding boxes and IDs.
 - Publishes tracked images (e.g., `/tracker/output_image`)
 
 ---
