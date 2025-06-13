@@ -2,7 +2,7 @@
 # This piece of code does the following:
 # Performs inference on the kitti frame and give outputs where class ID correspond to YOLO/COCO format.
 # Computes IoU between person & bicycle to classify either pedestrian (keep) or cyclist (discard) based on threshold.
-# Saves all detection in BYTETrack format.
+# Saves all detection (cars, persons only) in BYTETrack format.
 
 from ultralytics import YOLO
 import os
