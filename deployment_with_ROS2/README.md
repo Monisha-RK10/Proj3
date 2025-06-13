@@ -6,17 +6,17 @@ This folder contains ROS2 nodes used to deploy the real-time multi-object tracki
 
 ## Nodes
 
-### 1. `kitti_publisher.py`
-- Reads KITTI left camera images (`image_02/`)
+### `kitti_publisher.py`
+- Reads KITTI left camera images (`image_02/0000/`)
 - Publishes them as `sensor_msgs/msg/Image` on topic `/camera/image_raw`
 
-### 2. `tracker_node.py`
+### `tracker_node.py`
 - Subscribes to `/camera/image_raw`
 - Runs:
   - YOLOv8 detection
   - Cyclist filtering (IoU between `person` and `bicycle`)
   - BYTETrack for tracking
-  - Assigns class IDs back using IoU
+  - Assigns class IDs back using IoU and threshold
   - Visualizes tracked objects with bounding boxes and IDs.
 - Publishes tracked images (e.g., `/tracker/output_image`)
 
