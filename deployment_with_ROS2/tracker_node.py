@@ -4,9 +4,9 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
-from ultralytics import YOLO                                                                                 # Ultralytics YOLOv8 model wrapper
+from ultralytics import YOLO                                                                                    # Ultralytics YOLOv8 model wrapper
 from shapely.geometry import box
-from types import SimpleNamespace                                                                            # Helper to pass parameters to BYTETracker
+from types import SimpleNamespace                                                                               # Helper to pass parameters to BYTETracker
 from yolox.tracker.byte_tracker import BYTETracker      
 #from byte_tracker import BYTETracker
 
@@ -18,11 +18,11 @@ class TrackerNode(Node):
     def __init__(self):
         super().__init__('tracker_node')
 
-        self.subscription = self.create_subscription(Image, '/camera/image_raw', self.listener_callback, 10) # Subscription, listener_callback: this function will be called every time a new message is received on the topic (/camera/image_raw)
+        self.subscription = self.create_subscription(Image, '/camera/image_raw', self.listener_callback, 10)    # Subscription, listener_callback: this function will be called every time a new message is received on the topic (/camera/image_raw)
         self.bridge = CvBridge()
 
         # Publish result
-        self.pub_image = self.create_publisher(Image, '/tracker/output_image', 10)                           # Publisher
+        self.pub_image = self.create_publisher(Image, '/tracker/output_image', 10)                              # Publisher
 
         # Load YOLOv8 model (trained on COCO)
         self.model = YOLO("yolov8s.pt")
@@ -41,7 +41,7 @@ class TrackerNode(Node):
             min_box_area=100
         ), frame_rate=10)
 
-        self.image_shape = None                                                                               # Will be updated on each frame
+        self.image_shape = None                                                                                 # Will be updated on each frame
 
     def compute_iou(self, box1, box2):
         # box1 and box2 are (x1, y1, x2, y2)
@@ -51,7 +51,7 @@ class TrackerNode(Node):
             return 0.0
         return b1.intersection(b2).area / b1.union(b2).area
 
-    def listener_callback(self, msg):                                                                        #  Called in subscription, when it receives a message from the defined topic (this callback is called on message arrival)
+    def listener_callback(self, msg):                                                                           #  Called in subscription, when it receives a message from the defined topic (this callback is called on message arrival)
         # Convert ROS Image to OpenCV image
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         self.image_shape = frame.shape[:2]  # (height, width)
@@ -70,7 +70,7 @@ class TrackerNode(Node):
             if cls == self.wanted_classes['person']:
                 person_dets.append((x1, y1, x2, y2, conf))
             elif cls == self.wanted_classes['bicycle']:
-                bicycle_boxes.append((x1, y1, x2, y2))                                                            # No conf considered because KITTI does not have bicycle (check IoU between person & bicycle boxes)
+                bicycle_boxes.append((x1, y1, x2, y2))                                                          # No conf considered because KITTI does not have bicycle (check IoU between person & bicycle boxes)
             elif cls == self.wanted_classes['car']:
                 car_dets.append((x1, y1, x2, y2, conf))
 
@@ -98,16 +98,16 @@ class TrackerNode(Node):
 
         tracked_results = []
         for t in tracks:
-            track_box = [*t.tlbr]                                                                                 # [x1, y1, x2, y2]
+            track_box = [*t.tlbr]                                                                               # [x1, y1, x2, y2]
             best_iou = 0.0
             best_class = -1
             for det in filtered_detections:
                 iou = self.compute_iou(track_box, det[:4])
-                if iou > best_iou:                                                                                # find the det box that has the max iou with the tracker box
+                if iou > best_iou:                                                                              # find the det box that has the max iou with the tracker box
                     best_iou = iou
-                    best_class = int(det[5])                                                                      # standard greedy assignment
+                    best_class = int(det[5])                                                                    # standard greedy assignment
             # If no good match, fallback class is car (2)
-            class_id = best_class if best_iou > 0.3 else 2                                                        # Fallback to car
+            class_id = best_class if best_iou > 0.3 else 2                                                      # Fallback to car
             tracked_results.append({
                 'track_id': t.track_id,
                 'class_id': class_id,
@@ -120,7 +120,7 @@ class TrackerNode(Node):
             x1, y1, x2, y2 = map(int, tr['bbox'])
             class_id = tr['class_id']
             track_id = tr['track_id']
-            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)                                                # green for car, blue for pedestrian
+            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)                                               # green for car, blue for pedestrian
             label = f"{self.id_to_name.get(class_id, 'unknown')} ID:{track_id}"
             cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color, 2)
             label_y = max(y1 - 10, 10)
@@ -131,7 +131,7 @@ class TrackerNode(Node):
         
         # Convert and publish as ROS Image
         out_msg = self.bridge.cv2_to_imgmsg(vis_frame, encoding='bgr8')
-        self.pub_image.publish(out_msg)                                                                          # Publish Visualization
+        self.pub_image.publish(out_msg)                                                                         # Publish Visualization
 
 def main(args=None):
     rclpy.init(args=args)
