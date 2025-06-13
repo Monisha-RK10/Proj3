@@ -9,7 +9,7 @@ import time                                                                     
 class KittiPublisher(Node):                                                      # Custom ROS 2 node that inherits from Node (publishers, timers, loggers, etc)
     def __init__(self):
         super().__init__('kitti_publisher')                                      # Node initialization
-        self.publisher_ = self.create_publisher(Image, '/camera/image_raw', 10)  # Queue size: how many messages can be stored if subscribers are slow.
+        self.publisher_ = self.create_publisher(Image, '/camera/image_raw', 10)  # Image: ROS msg type, Queue size: how many messages can be stored if subscribers are slow.
         self.bridge = CvBridge()
 
         # Update this path based on your sequence
