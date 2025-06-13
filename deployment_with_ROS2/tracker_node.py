@@ -4,10 +4,10 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
-from ultralytics import YOLO
+from ultralytics import YOLO                                                                             # Ultralytics YOLOv8 model wrapper
 from shapely.geometry import box
-from types import SimpleNamespace
-from yolox.tracker.byte_tracker import BYTETracker
+from types import SimpleNamespace                                                                         # Helper to pass parameters to BYTETracker
+from yolox.tracker.byte_tracker import BYTETracker      
 #from byte_tracker import BYTETracker
 
 np.float = float
@@ -18,12 +18,11 @@ class TrackerNode(Node):
     def __init__(self):
         super().__init__('tracker_node')
 
-        self.subscription = self.create_subscription(
-            Image, '/camera/image_raw', self.listener_callback, 10)
+        self.subscription = self.create_subscription(Image, '/camera/image_raw', self.listener_callback, 10) # Subscription 
         self.bridge = CvBridge()
 
         # Publish result
-        self.pub_image = self.create_publisher(Image, '/tracker/output_image', 10)
+        self.pub_image = self.create_publisher(Image, '/tracker/output_image', 10)                          # Publisher
 
         # Load YOLOv8 model (trained on COCO)
         self.model = YOLO("yolov8s.pt")
@@ -42,7 +41,7 @@ class TrackerNode(Node):
             min_box_area=100
         ), frame_rate=10)
 
-        self.image_shape = None  # Will be updated on each frame
+        self.image_shape = None                                                                               # Will be updated on each frame
 
     def compute_iou(self, box1, box2):
         # box1 and box2 are (x1, y1, x2, y2)
@@ -71,14 +70,14 @@ class TrackerNode(Node):
             if cls == self.wanted_classes['person']:
                 person_dets.append((x1, y1, x2, y2, conf))
             elif cls == self.wanted_classes['bicycle']:
-                bicycle_boxes.append((x1, y1, x2, y2)) # No conf considered because KITTI does not have bicycle (check IoU between person & bicycle boxes)
+                bicycle_boxes.append((x1, y1, x2, y2))                                                              # No conf considered because KITTI does not have bicycle (check IoU between person & bicycle boxes)
             elif cls == self.wanted_classes['car']:
                 car_dets.append((x1, y1, x2, y2, conf))
 
         # Filter out cyclists: if person overlaps bicycle above threshold, consider cyclist (discard as person)
         pedestrian_dets = []
         for px1, py1, px2, py2, pconf in person_dets:
-            is_cyclist = any(self.compute_iou((px1, py1, px2, py2), b) > 0.5 for b in bicycle_boxes)
+            is_cyclist = any(self.compute_iou((px1, py1, px2, py2), b) > 0.9 for b in bicycle_boxes)
             if not is_cyclist:
                 pedestrian_dets.append((px1, py1, px2, py2, pconf))
 
@@ -104,9 +103,9 @@ class TrackerNode(Node):
             best_class = -1
             for det in filtered_detections:
                 iou = self.compute_iou(track_box, det[:4])
-                if iou > best_iou:           # find the det box that has the max iou with the tracker box
+                if iou > best_iou:                                                                                  # find the det box that has the max iou with the tracker box
                     best_iou = iou
-                    best_class = int(det[5]) # standard greedy assignment
+                    best_class = int(det[5])                                                                        # standard greedy assignment
             # If no good match, fallback class is car (2)
             class_id = best_class if best_iou > 0.3 else 2
             tracked_results.append({
@@ -121,7 +120,7 @@ class TrackerNode(Node):
             x1, y1, x2, y2 = map(int, tr['bbox'])
             class_id = tr['class_id']
             track_id = tr['track_id']
-            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)  # green for car, blue for pedestrian
+            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)                                                  # green for car, blue for pedestrian
             label = f"{self.id_to_name.get(class_id, 'unknown')} ID:{track_id}"
             cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color, 2)
             label_y = max(y1 - 10, 10)
