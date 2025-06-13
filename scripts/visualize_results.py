@@ -6,7 +6,7 @@
 
 import os
 import cv2
-from collections import defaultdict                                                                   # Stores frame-wise detections conveniently
+from collections import defaultdict                                                                   # Automatically initializes an empty list for new keys (similar to setDefault xyz.setdefault(abc, []).append(d)).
 from moviepy.editor import VideoFileClip                                                              # Converts the output video into a GIF
 
 # Config
