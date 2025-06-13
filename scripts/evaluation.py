@@ -1,16 +1,15 @@
 # Step 3: Evaluate tracker
 
+import motmetrics as mm
+import os
 import numpy as np
 
 # Patch for NumPy 2.0+
 if not hasattr(np, 'asfarray'):
     np.asfarray = lambda a: np.asarray(a, dtype=np.float64)
 
-import motmetrics as mm
-import os
-
-ALLOWED_CLASSES = ["Car", "Pedestrian"] #, "Cyclist"]
-ALLOWED_CLASS_IDS = [0, 2]  # 0 = person (Pedestrian), 2 = car
+ALLOWED_CLASSES = ["Car", "Pedestrian"]                                               # For KITTI ground truth file
+ALLOWED_CLASS_IDS = [0, 2]                                                            # For BYTETrack output file, 0 = person (Pedestrian), 2 = car 
 
 def read_kitti_gt_file(file_path, allowed_classes):
     data = {}
@@ -28,7 +27,7 @@ def read_kitti_gt_file(file_path, allowed_classes):
             data[frame_id].append([track_id] + bbox)                                                    # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] } 
     return data
 
-def read_tracker_file(file_path):                                                                       # not reading the class id 
+def read_tracker_file(file_path, allowed_classes_id):                                                   
     data = {}
     with open(file_path, 'r') as f:
         for line in f:
@@ -39,8 +38,8 @@ def read_tracker_file(file_path):                                               
             track_id = int(fields[1])
             class_id = int(fields[2])
             
-            if class_id not in ALLOWED_CLASS_IDS:
-                continue  # discard bicycles or misclassed detections
+            if class_id not in allowed_classes_id:
+                continue                                                                                # discard bicycles or misclassed detections
                 
             bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
@@ -66,7 +65,7 @@ def evaluate_mot(gt_data, pred_data):
 
         # Update accumulator with this frame's GT <-> prediction matches
         # Does matching for that frame using the Hungarian algorithm, then stores those matches to accumulate metrics over all frames.
-        acc.update(gt_ids, pred_ids, distances) # distance[i][j] = 1 - IoU between GT i and Pred j
+        acc.update(gt_ids, pred_ids, distances)                                                            # distance[i][j] = 1 - IoU between GT i and Pred j
 
     mh = mm.metrics.create()
     summary = mh.compute(acc, metrics=mm.metrics.motchallenge_metrics, name='summary')
@@ -77,6 +76,6 @@ gt_file = '/content/drive/MyDrive/kitti_tracking/data_tracking_label_2/training/
 pred_file = '/content/drive/MyDrive/kitti_tracking/tracks_bytetrack/0000.txt'
 
 gt_data = read_kitti_gt_file(gt_file, allowed_classes=ALLOWED_CLASSES)
-pred_data = read_tracker_file(pred_file)
+pred_data = read_tracker_file(pred_file, allowed_classes_id=ALLOWED_CLASS_IDS)
 
 evaluate_mot(gt_data, pred_data)
