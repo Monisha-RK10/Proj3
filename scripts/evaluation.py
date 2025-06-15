@@ -43,13 +43,13 @@ def read_tracker_file(file_path, allowed_classes_id):
         for line in f:
             fields = line.strip().split(',')
             if len(fields) < 7:
-                fields = line.strip().split()                                                           # support space-separated
+                fields = line.strip().split()                                                           # Support space-separated
             frame_id = int(fields[0])
             track_id = int(fields[1])
             class_id = int(fields[2])
             
             if class_id not in allowed_classes_id:
-                continue                                                                                # discard bicycles or misclassed detections
+                continue                                                                                # Discard bicycles or misclassed detections
                 
             bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
