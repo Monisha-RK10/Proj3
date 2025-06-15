@@ -15,17 +15,12 @@ KITTI Image → YOLOv8 → Detection (.txt) → BYTETrack → Tracking (.txt) �
 - Output: Writes detections in BYTETrack format with only class IDs 0 (person) and 2 (car).
 
 ### `bytetrack_tracker.py` (Tracking, BYTETrack + Class Mapping)
-Function: Applies BYTETrack on detections to create persistent identity tracks.
-
-Problem: BYTETrack is class-agnostic.
-
-Solution: Matches tracker output box with the best IoU detection box from YOLO:
-
-If IoU > 0.3, assign detection's class ID.
-
-Else assign fallback class (car) for unmatched boxes (based on KITTI prior).
-
-Output: Tracker results are saved in KITTI format for downstream evaluation.
+- Function: Applies BYTETrack on detections to create persistent identity tracks.
+- Problem: BYTETrack is class-agnostic.
+- Solution: Matches tracker output box with the best IoU detection box from YOLO:
+  - If IoU > 0.3, assign detection's class ID.
+  - Else assign fallback class (car) for unmatched boxes (based on KITTI prior).
+- Output: Tracker results are saved in KITTI format for downstream evaluation.
 
 ### `evaluation.py` (KITTI Format Evaluation)
 Function: Computes MOT metrics (MOTA, IDF1, FP, FN, etc.) between GT and predictions.
