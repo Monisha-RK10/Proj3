@@ -1,4 +1,4 @@
-## BYTETrack uses:
+### BYTETrack uses:
 
 - IoU-only matching: No appearance features (unlike DeepSORT), association is based purely on bounding box overlap.
 - Dual-threshold strategy: Tracks high-confidence detections for new/confirmed tracks & low-confidence detections to help associate missed tracks.
@@ -6,7 +6,7 @@
 
 ---
 
-## Why BYTETrack:
+### Why BYTETrack:
 Imagine you build a real-time surveillance system:
 
 - YOLO only detects people in each frame.
@@ -23,7 +23,7 @@ Imagine you build a real-time surveillance system:
 
 ---
 
-## Metric Explanation
+### Metric Explanation
 
 | Metric           | Meaning                                                                    | Real-world Example  |
 | ---------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
