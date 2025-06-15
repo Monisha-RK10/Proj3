@@ -1,5 +1,6 @@
 # Step 3: Evaluate tracker
-# Kitti ground truth has many classes such as 'Dont Care', 'Van', 'Cyclist'. For this project, only 'Car' and 'Pedestrian' are filtered.
+# Kitti ground truth has many classes such as 'Dont Care', 'Van', 'Cyclist'. 
+# For this project, only 'Car' and 'Pedestrian' are filtered.
 # BYTETrack file has class IDs 0 and 2 which correspond to person and car as per COCO-ID
 
 # This piece of code does the following:
@@ -17,8 +18,8 @@ import numpy as np
 if not hasattr(np, 'asfarray'):
     np.asfarray = lambda a: np.asarray(a, dtype=np.float64)
 
-ALLOWED_CLASSES = ["Car", "Pedestrian"]                                               # For KITTI ground truth file
-ALLOWED_CLASS_IDS = [0, 2]                                                            # For BYTETrack output file, 0 = person (Pedestrian), 2 = car 
+ALLOWED_CLASSES = ["Car", "Pedestrian"]                                                                 # For KITTI ground truth file
+ALLOWED_CLASS_IDS = [0, 2]                                                                              # For BYTETrack output file, 0 = person (Pedestrian), 2 = car 
 
 def read_kitti_gt_file(file_path, allowed_classes):
     data = {}
@@ -53,15 +54,15 @@ def read_tracker_file(file_path, allowed_classes_id):
             bbox = list(map(float, fields[6:10]))                                                       # [x1, y1, x2, y2]
             if frame_id not in data:
                 data[frame_id] = []
-            data[frame_id].append([track_id] + bbox)                                                     # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] }  
+            data[frame_id].append([track_id] + bbox)                                                    # { frame_id: [ [track_id, x1, y1, x2, y2], ... ] }  
 
     return data
 
 def evaluate_mot(gt_data, pred_data):
-    acc = mm.MOTAccumulator(auto_id=True)                                                                # Automatically assign internal IDs to detections that aren't explicitly matched, tracks matches frame-by-frame
+    acc = mm.MOTAccumulator(auto_id=True)                                                               # Automatically assign internal IDs to detections that aren't explicitly matched, tracks matches frame-by-frame
     for frame_id in sorted(gt_data.keys()):
-        gt_objs = gt_data.get(frame_id, [])                                                              # GT for this frame
-        pred_objs = pred_data.get(frame_id, [])                                                          # Tracker output
+        gt_objs = gt_data.get(frame_id, [])                                                             # GT for this frame
+        pred_objs = pred_data.get(frame_id, [])                                                         # Tracker output
 
         gt_ids = [obj[0] for obj in gt_objs]
         gt_boxes = [obj[1:] for obj in gt_objs]
@@ -74,7 +75,7 @@ def evaluate_mot(gt_data, pred_data):
 
         # Update accumulator with this frame's GT <-> prediction matches
         # Does matching for that frame using the Hungarian algorithm, then stores those matches to accumulate metrics over all frames.
-        acc.update(gt_ids, pred_ids, distances)                                                            # distance[i][j] = 1 - IoU between GT i and Pred j
+        acc.update(gt_ids, pred_ids, distances)                                                         # distance[i][j] = 1 - IoU between GT i and Pred j
 
     mh = mm.metrics.create()
     summary = mh.compute(acc, metrics=mm.metrics.motchallenge_metrics, name='summary')
