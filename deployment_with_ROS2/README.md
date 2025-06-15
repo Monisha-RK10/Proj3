@@ -22,7 +22,7 @@ This folder contains ROS2 nodes used to deploy the real-time multi-object tracki
 
 ---
 
-## How to Run
+### How to Run
 
 ```bash
 # Source your ROS2 workspace
