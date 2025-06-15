@@ -5,7 +5,7 @@ This folder contains all core scripts for the real-time Multi-Object Tracking (M
 ---
 
 ## Pipeline Overview
-KITTI Image → YOLOv8 → Detection (.txt) → BYTETrack → Tracking (.txt) → KITTI Eval + Visualization
+`KITTI Image → YOLOv8 → Detection (.txt) → BYTETrack → Tracking (.txt) → KITTI Eval + Visualization`
 
 ---
 
