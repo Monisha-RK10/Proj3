@@ -9,10 +9,8 @@ KITTI Image → YOLOv8 → Detection (.txt) → BYTETrack → Tracking (.txt) �
 - Function: Runs YOLOv8 on KITTI frames for car, person, and bicycle classes.
 
 - Class Logic:
-
- - Calculates IoU between person and bicycle boxes.
-
- - If overlap is high, assumes cyclist (discarded); else keeps as pedestrian.
+  - Calculates IoU between person and bicycle boxes.
+  - If overlap is high, assumes cyclist (discarded); else keeps as pedestrian.
 
 - Output: Writes detections in BYTETrack format with only class IDs 0 (person) and 2 (car).
 
