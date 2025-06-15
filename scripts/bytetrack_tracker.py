@@ -1,17 +1,22 @@
 # Step 2: Run tracker on all the detection from YOLOv8
 # This function does the following:
-# Updates tracker for detection done by YOLOv8 for specific classes (YOLO gives detections, BYTETrack uses detections + history to match or create tracks.),
-# Computes IoU between track box & all detections to assign class (best IoU between tracker & detection box is considered, if best IoU > 0.3, consider that detection's class ID, else fallback), and
+# Updates tracker for detection done by YOLOv8 for specific classes 
+# YOLO gives detections, BYTETrack uses detections + history to match or create tracks.
+# Computes best IoU between track box & all detections to assign class.
+# If best IoU > 0.3, consider that detection's class ID, else fallback.
 # Writes results in KITTI format for evaluation.
 
 # Helper: Compute IoU
 # Problem: BYTETrack doesn't store the class information
-# Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap and grabs its cls_id if IoU> 0.3.
+# Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap 
+# and grabs its cls_id if IoU> 0.3.
 
 # Note: 
 # 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
-# 2) Fallback is considered ('car') for class assignment when IoU for best match < 0.3. A class-aware tracker or fused re-ID may improve this. 
-# Reason: In KITTI, most false unmatched tracks are likely cars. It is a design tradeoff to avoid losing potentially valuable tracklets, though it may impact evaluation.
+# 2) Fallback is considered ('car') for class assignment when IoU for best match < 0.3.
+# A class-aware tracker or fused re-ID may improve the fallback scenario. 
+# Reason: In KITTI, most false unmatched tracks are likely cars. 
+# It is a design tradeoff to avoid losing potentially valuable tracklets, though it may impact evaluation.
 
 import os
 import cv2
