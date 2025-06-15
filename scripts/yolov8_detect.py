@@ -68,8 +68,7 @@ for filename in sorted(os.listdir(input_folder)):
         for i, pi in enumerate(persons):
             if i not in matched_person_indices:
                 x1, y1, x2, y2, conf = pi
-                results_lines.append(f"{frame_id},-1,{x1:.2f},{y1:.2f},{x2:.2f},{y2:.2f},{conf:.2f},0\n")  # 0 = person, frameid, trackid, xxyy, conf
-
+                results_lines.append(f"{frame_id},-1,{x1:.2f},{y1:.2f},{x2:.2f},{y2:.2f},{conf:.2f},0\n")  # 0 = person
         # Save cars
         for ci in cars:
             x1, y1, x2, y2, conf = ci
