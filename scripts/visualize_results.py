@@ -43,19 +43,19 @@ def load_predictions(file_path):
             frame = int(fields[0])
             track_id = int(fields[1])
             cls_id = int(fields[2])
-            x1, y1, x2, y2 = map(float, fields[6:10])                                               # KITTI uses [x1, y1, x2, y2]
-            conf = float(fields[5]) if len(fields) > 5 else 1.0                                     # fallback if no score
-            label = class_id_to_name.get(cls_id, "Unknown")                                         # Store label & unknown (default)
+            x1, y1, x2, y2 = map(float, fields[6:10])                                                 # KITTI uses [x1, y1, x2, y2]
+            conf = float(fields[5]) if len(fields) > 5 else 1.0                                       # fallback if no score
+            label = class_id_to_name.get(cls_id, "Unknown")                                           # Store label & unknown (default)
             data[frame].append((track_id, label, (x1, y1, x2, y2), conf))
     return data
 
 # Colors for GT & predictions
 CLASS_COLORS = {
-    "Car": (0, 255, 255),                                                                           # Yellow for GT Car
-    "Pedestrian": (0, 0, 255),                                                                      # Red for GT Pedestrian
-    "Pred_Car": (0, 255, 0),                                                                        # Green for predicted Car
-    "Pred_Pedestrian": (255, 0, 0),                                                                 # Blue for predicted Pedestrian
-    "Unknown": (100, 100, 100)                                                                      # Grey for fallback
+    "Car": (0, 255, 255),                                                                             # Yellow for GT Car
+    "Pedestrian": (0, 0, 255),                                                                        # Red for GT Pedestrian
+    "Pred_Car": (0, 255, 0),                                                                          # Green for predicted Car
+    "Pred_Pedestrian": (255, 0, 0),                                                                   # Blue for predicted Pedestrian
+    "Unknown": (100, 100, 100)                                                                        # Grey for fallback
 }
 
 # Video generation
@@ -82,7 +82,7 @@ for frame_idx, img_name in enumerate(img_files):
     # Draw predicted boxes
     for track_id, label, box, conf in pred_boxes.get(frame_idx, []):
         x1, y1, x2, y2 = map(int, box)
-        color = CLASS_COLORS.get(f"Pred_{label}", CLASS_COLORS["Unknown"])                          # If label, then color of that label else unknown class' color i.e., grey
+        color = CLASS_COLORS.get(f"Pred_{label}", CLASS_COLORS["Unknown"])                            # If label, then color of that label else unknown class' color i.e., grey
         cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
         cv2.putText(img, f"Pred: {label} ID: {track_id}", (int(x1), int(y2) + 15),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
@@ -97,6 +97,6 @@ mp4_path = "/content/kitti_tracking_output.mp4"
 gif_path = "/content/kitti_tracking_output.gif"
 
 clip = VideoFileClip(mp4_path)
-clip.subclip(0, 10).resize(0.5).write_gif(gif_path, fps=10)                                         # Resize to avoid large GIFs
+clip.subclip(0, 10).resize(0.5).write_gif(gif_path, fps=10)                                           # Resize to avoid large GIFs
 
 print(f"GIF saved to: {gif_path}")
