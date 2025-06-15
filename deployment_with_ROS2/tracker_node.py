@@ -51,7 +51,7 @@ class TrackerNode(Node):
             return 0.0
         return b1.intersection(b2).area / b1.union(b2).area
 
-    def listener_callback(self, msg):                                                                           #  Called in subscription, when it receives a message from the defined topic (this callback is called on message arrival)
+    def listener_callback(self, msg):                                                                           # Called in subscription, when it receives a message from the defined topic (this callback is called on message arrival)
         # Convert ROS Image to OpenCV image
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         self.image_shape = frame.shape[:2]  # (height, width)
@@ -103,9 +103,9 @@ class TrackerNode(Node):
             best_class = -1
             for det in filtered_detections:
                 iou = self.compute_iou(track_box, det[:4])
-                if iou > best_iou:                                                                              # find the det box that has the max iou with the tracker box
+                if iou > best_iou:                                                                              # Find the det box that has the max iou with the tracker box
                     best_iou = iou
-                    best_class = int(det[5])                                                                    # standard greedy assignment
+                    best_class = int(det[5])                                                                    # Standard greedy assignment
             # If no good match, fallback class is car (2)
             class_id = best_class if best_iou > 0.3 else 2                                                      # Fallback to car
             tracked_results.append({
@@ -120,7 +120,7 @@ class TrackerNode(Node):
             x1, y1, x2, y2 = map(int, tr['bbox'])
             class_id = tr['class_id']
             track_id = tr['track_id']
-            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)                                               # green for car, blue for pedestrian
+            color = (0, 255, 0) if class_id == 2 else (255, 0, 0)                                               # Green for car, blue for pedestrian
             label = f"{self.id_to_name.get(class_id, 'unknown')} ID:{track_id}"
             cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color, 2)
             label_y = max(y1 - 10, 10)
