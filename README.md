@@ -100,6 +100,6 @@ No appearance cues were used, so tracking is purely IoU-based. There is still ro
 ## Author
 
 **Monisha**  
-Connect via [Medium](https://medium.com/@monishatemp20)  
+Connect via [Medium](https://medium.com/@monishatemp20)  [Linkedin](https://www.linkedin.com/in/monisha-rao-28129676/)
 
 ---
