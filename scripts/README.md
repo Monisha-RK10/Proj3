@@ -36,8 +36,8 @@ This folder contains all core scripts for the real-time Multi-Object Tracking (M
 
 ### visualize_results.py (Tracking Visualization)
 - Function: Visualizes frame-by-frame tracking:
-  - Green: For predicted Car tracked boxes with IDs
-  - Blue: For predicted Pedestrian tracked boxes with IDs
+  - Green: For predicted `Car` tracked boxes with IDs
+  - Blue: For predicted `Pedestrian` tracked boxes with IDs
 - Output:
   - Annotated video for quick review
   - Optional conversion to GIF for preview in report
