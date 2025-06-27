@@ -40,4 +40,4 @@ This folder contains all core scripts for the real-time Multi-Object Tracking (M
   - Blue: Predicted tracked boxes with IDs
 - Output:
   - Annotated video for quick review
-  - Optional conversion to GIF for preview in repor
+  - Optional conversion to GIF for preview in report
