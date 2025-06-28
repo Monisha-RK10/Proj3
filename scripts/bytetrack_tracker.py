@@ -9,7 +9,7 @@
 # Helper: Compute IoU
 # Problem: BYTETrack doesn't store the class information
 # Solution: Match 'track_box' from BYTETrack to a detection box from YOLO with the highest IoU overlap 
-# and grabs its cls_id if IoU> 0.3.
+# and grab its cls_id if IoU> 0.3.
 
 # Note: 
 # 1) Low-confidence secondary queue logic can be added for further stability, especially in occlusion scenarios
