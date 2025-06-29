@@ -4,6 +4,12 @@
 - Dual-threshold strategy: Tracks high-confidence detections for new/confirmed tracks & low-confidence detections to help associate missed tracks.
 - Simple Kalman Filter: Models bounding boxes with (center x, center y, aspect ratio, height) for prediction and update.
 
+BYTETrack gets detections → splits into high/low confidence → matches high-conf detections with existing tracks using IoU.
+- Unmatched high-conf detections start new tracks.
+- Unmatched tracks are rescued using low-confidence detections if IoU allows.
+- Still unmatched tracks are retained up to `track_buffer` frames.
+- Only high-conf detections can create new IDs, low-conf can only extend existing ones.
+
 ---
 
 ### Why BYTETrack:
