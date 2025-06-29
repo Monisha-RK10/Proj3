@@ -20,6 +20,9 @@
 
 **Solution:** Implemented a **cyclist filter**, if IoU between `person` and `bicycle` is high → discard as `Cyclist`
 
+> Note: `Post-BYTETrack Assignment` (more complex post-processing) is also possible, where we can use temporal + spatial logic to merge/fuse/reclassify more intelligently.
+
+
 ### Challenge 2: BYTETrack ignores class labels
 - BYTETrack only tracks bounding boxes
 
